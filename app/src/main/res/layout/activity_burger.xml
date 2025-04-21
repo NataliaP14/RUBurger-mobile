@@ -89,7 +89,6 @@
                     <CheckBox android:id="@+id/cheese" android:text="@string/cheese" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
                 </LinearLayout>
 
-                <!-- Quantity Selector -->
                 <LinearLayout
                     android:orientation="horizontal"
                     android:gravity="center"

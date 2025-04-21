@@ -1,10 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/brown_background"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".controller.SandwichController">
 
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/ru_burger"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:background="#871826"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_bg"
+            android:padding="24dp"
+            android:elevation="4dp">
+
+            <LinearLayout
+                android:id="@+id/sandwichContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:src="@drawable/sandwich"
+                    android:id="@+id/sandwichIcon"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:text="@string/customize_your_burger"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:layout_marginBottom="16dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
+
+                <TextView android:text="@string/select_protein" android:layout_height="wrap_content" android:layout_width="wrap_content" />
+                <RadioGroup
+                    android:id="@+id/proteinGroup"
+                    android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="wrap_content">
+                    <RadioButton android:id="@+id/roastBeef" android:text="@string/roast_beef" android:checked="true" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <RadioButton android:id="@+id/salmon" android:text="@string/salmon" android:layout_height="wrap_content" android:layout_width="wrap_content" />
+                    <RadioButton android:id="@+id/chicken" android:text="@string/chicken" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                </RadioGroup>
+
+                <TextView android:text="@string/select_bread" android:layout_marginTop="16dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                <Spinner
+                    android:id="@+id/breadSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/spinner_background"/>
+
+                <TextView android:text="@string/add_ons" android:layout_marginTop="16dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                <LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="wrap_content">
+                    <CheckBox android:id="@+id/lettuce" android:text="@string/lettuce" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <CheckBox android:id="@+id/tomato" android:text="@string/tomato" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <CheckBox android:id="@+id/onion" android:text="@string/onion" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="wrap_content">
+                    <CheckBox android:id="@+id/avocado" android:text="@string/avocado" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <CheckBox android:id="@+id/cheese" android:text="@string/cheese" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content">
+                    <ImageButton
+                        android:src="@drawable/minus"
+                        android:id="@+id/minusBtn"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@android:color/transparent"
+                        />
+                    <TextView
+                        android:id="@+id/quantityText"
+                        android:text="@string/_1"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"/>
+                    <ImageButton
+                        android:src="@drawable/plus"
+                        android:id="@+id/plusBtn"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@android:color/transparent"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/priceText"
+                    android:text="@string/price_placeholder"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
+
+                <Button
+                    android:id="@+id/addToCart"
+                    android:text="@string/add_to_cart"
+                    android:textColor="#fff"
+                    android:backgroundTint="#BA2B3E"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
+            </LinearLayout>
+        </FrameLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center"
+        android:background="#871826"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/menuButton"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@string/menu"
+            android:textColor="#fff"
+            android:backgroundTint="#BA2B3E"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content" />
+
+        <Button
+            android:id="@+id/cartButton"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@string/cart"
+            android:textColor="#fff"
+            android:backgroundTint="#BA2B3E"
+            android:layout_marginStart="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content" />
+
+        <Button
+            android:id="@+id/ordersButton"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@string/my_orders"
+            android:textColor="#fff"
+            android:backgroundTint="#BA2B3E"
+            android:layout_marginStart="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
