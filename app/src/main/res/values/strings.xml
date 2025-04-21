@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">RU Burger</string>
+    <string name="delicious_burgers_with_fresh_ingredients">Delicious burgers with fresh ingredients.</string>
+    <string name="ru_burger">RU Burger</string>
+    <string name="burger">Burger</string>
+    <string name="sandwich">Sandwich</string>
+    <string name="sandwichicon">sandwichIcon</string>
+    <string name="tasty_sandwiches_with_a_variety_of_fillings">Tasty sandwiches with a variety of fillings.</string>
+    <string name="beverage">Beverage</string>
+    <string name="refreshing_drinks_to_complement_your_meal">Refreshing drinks to complement your meal.</string>
+    <string name="side">Side</string>
+    <string name="delicious_sides_to_complete_your_meal">Delicious sides to complete your meal.</string>
+    <string name="cart">Cart</string>
+    <string name="my_orders">My Orders</string>
+    <string name = "menu">Main Menu</string>
+    <string name="customize_your_burger">Customize Your Perfect Bite\n</string>
+    <string name="select_patty">Select Patty\n</string>
+    <string name="single_patty">Single Patty</string>
+    <string name="double_patty">Double Patty\n</string>
+    <string name="brioche">Brioche</string>
+    <string name="wheat">Wheat</string>
+    <string name="pretzel">Pretzel</string>
+    <string name="select_bread">Select Bread</string>
+    <string name="add_ons">Add Ons</string>
+    <string name="lettuce">Lettuce</string>
+    <string name="tomato">Tomato</string>
+    <string name="onion">Onion</string>
+    <string name="avocado">Avocado</string>
+    <string name="cheese">Cheese</string>
+    <string name="_1">1</string>
+    <string name="price_placeholder">Price: $0.00</string>
+    <string name="add_to_cart">Add To Cart</string>
 </resources>
