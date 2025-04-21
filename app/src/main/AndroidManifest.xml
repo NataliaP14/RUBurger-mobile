@@ -21,6 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".controller.BurgerController"/>
+        <activity android:name=".controller.SandwichController"/>
+        <activity android:name=".controller.BeverageController"/>
+        <activity android:name=".controller.SideController"/>
     </application>
-
 </manifest>

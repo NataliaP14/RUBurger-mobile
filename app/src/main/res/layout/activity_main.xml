@@ -1,19 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/brown_background"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".controller.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ru_burger"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:background="#871826"
+            android:padding="16dp"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:id="@+id/burgerBox"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:background="@drawable/card_bg"
+            android:gravity="center_horizontal"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:src="@drawable/burger"
+                android:id="@+id/burgerIcon"
+                android:layout_width="175dp"
+                android:layout_height="150dp"
+                android:contentDescription="@string/burger"
+                />
+
+            <TextView
+                android:text="@string/burger"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+            <TextView
+                android:text="@string/delicious_burgers_with_fresh_ingredients"
+                android:textSize="20sp"
+                android:textColor="#444"
+                android:gravity="center"
+                android:layout_marginTop="4dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sandwichBox"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:background="@drawable/card_bg"
+            android:gravity="center_horizontal"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:src="@drawable/sandwich"
+                android:id="@+id/sandwichIcon"
+                android:layout_width="175dp"
+                android:layout_height="150dp"
+                android:contentDescription="@string/sandwich" />
+
+            <TextView
+                android:text="@string/sandwich"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+            <TextView
+                android:text="@string/tasty_sandwiches_with_a_variety_of_fillings"
+                android:textSize="20sp"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/beverageBox"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:background="@drawable/card_bg"
+            android:gravity="center_horizontal"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:src="@drawable/beverages"
+                android:id="@+id/beverageIcon"
+                android:layout_width="175dp"
+                android:layout_height="150dp"
+                android:contentDescription="@string/beverage" />
+
+            <TextView
+                android:text="@string/beverage"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+            <TextView
+                android:text="@string/refreshing_drinks_to_complement_your_meal"
+                android:textSize="20sp"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sideBox"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:background="@drawable/card_bg"
+            android:gravity="center_horizontal"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:src="@drawable/fries"
+                android:id="@+id/sideIcon"
+                android:layout_width="175dp"
+                android:layout_height="150dp"
+                android:contentDescription="@string/side" />
+
+            <TextView
+                android:text="@string/side"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                />
+
+            <TextView
+                android:text="@string/delicious_sides_to_complete_your_meal"
+                android:textSize="20sp"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:background="#871826"
+            android:padding="16dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/menuButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/menu"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#BA2B3E" />
+
+            <Button
+                android:id="@+id/cartButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cart"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#BA2B3E" />
+
+            <Button
+                android:id="@+id/ordersButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_orders"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#BA2B3E"
+                android:layout_marginStart="16dp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
