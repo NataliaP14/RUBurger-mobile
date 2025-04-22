@@ -39,7 +39,7 @@
     <Spinner
         android:id="@+id/dialogSizeSpinner"
         android:background="@drawable/spinner_background"
-        android:layout_width="250dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:minHeight="56dp"
         android:layout_marginBottom="24dp"
@@ -64,9 +64,12 @@
             android:id="@+id/dialogMinus"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:padding="5dp"
             android:background="@android:color/transparent"
             android:src="@drawable/minus"
-            android:contentDescription="@string/decrease_quantity" />
+            android:contentDescription="@string/decrease_quantity"
+            android:scaleType="fitCenter" />
+
 
         <TextView
             android:id="@+id/dialogQuantity"
@@ -83,15 +86,17 @@
             android:id="@+id/dialogPlus"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:padding="5dp"
             android:background="@android:color/transparent"
             android:src="@drawable/plus"
-            android:contentDescription="@string/increase_quantity" />
+            android:contentDescription="@string/increase_quantity"
+            android:scaleType="fitCenter"/>
     </LinearLayout>
 
     <TextView
         android:id="@+id/priceText"
         android:text="@string/price_placeholder"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -108,6 +113,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="@string/add_to_cart"
+        android:textSize="20sp"
         android:textColor="#FFFFFF"
         android:backgroundTint="#BA2B3E"
         app:layout_constraintTop_toBottomOf="@id/priceText"
