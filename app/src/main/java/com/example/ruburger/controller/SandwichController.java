@@ -2,9 +2,12 @@ package com.example.ruburger.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ImageButton;
@@ -18,6 +21,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.ruburger.R;
 import com.example.ruburger.model.AddOns;
 import com.example.ruburger.model.Bread;
+import com.example.ruburger.model.Sandwich;
+import com.example.ruburger.model.Protein;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -107,6 +112,23 @@ public class SandwichController extends AppCompatActivity {
         breadSpinner.setSelection(Arrays.asList(breads).indexOf(Bread.BRIOCHE));
 
 
+        breadSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                updatePrice();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        RadioGroup proteinGroup = findViewById(R.id.proteinGroup);
+        proteinGroup.setOnCheckedChangeListener((group, checkedId) -> updatePrice());
+
+
         CheckBox [] checkBoxes = {lettuce, tomato, onion, avocado, cheese};
         for (CheckBox checkBox : checkBoxes) {
             checkBox.setOnCheckedChangeListener(((buttonView, isChecked) -> {
@@ -133,7 +155,26 @@ public class SandwichController extends AppCompatActivity {
 
     private void updatePrice() {
 
+        Bread selectedBread = Bread.valueOf(breadSpinner.getSelectedItem().toString());
 
+        RadioGroup proteinGroup = findViewById(R.id.proteinGroup);
+        int selectedId = proteinGroup.getCheckedRadioButtonId();
+
+        Protein selectedProtein;
+        if (selectedId == R.id.roastBeef) {
+            selectedProtein = Protein.ROAST_BEEF;
+        } else if (selectedId == R.id.salmon) {
+            selectedProtein = Protein.SALMON;
+        } else {
+            selectedProtein = Protein.CHICKEN;
+        }
+
+        updateAddOns();
+
+        Sandwich tempSandwich = new Sandwich(quantity, selectedBread, selectedProtein, selectedAddOns);
+
+        double price = tempSandwich.price();
+        priceText.setText(currencyFormat.format(price));
     }
 
     private void updateAddOns() {

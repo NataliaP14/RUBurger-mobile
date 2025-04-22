@@ -64,12 +64,12 @@ public class BurgerController extends AppCompatActivity {
         Button ordersButton = findViewById(R.id.ordersButton);
 
         cartButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, CurrentOrderController.class); // Replace with actual cart screen class
+            Intent intent = new Intent(this, CurrentOrderController.class);
             startActivity(intent);
         });
 
         ordersButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, PlacedOrderController.class); // Replace with actual orders screen class
+            Intent intent = new Intent(this, PlacedOrderController.class);
             startActivity(intent);
         });
     }

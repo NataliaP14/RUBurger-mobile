@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ImageButton;
+import android.view.View;
+import android.widget.AdapterView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +17,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.ruburger.R;
+import com.example.ruburger.model.Bread;
 import com.example.ruburger.model.Size;
+import com.example.ruburger.model.Side;
+import com.example.ruburger.model.Sides;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -84,6 +89,30 @@ public class SideController extends AppCompatActivity {
 
     private void setupListeners() {
 
+        Side[] sides = Side.values();
+        List<String> sideList = new ArrayList<>();
+        for (Side side : sides) {
+            sideList.add(side.name());
+        }
+
+        ArrayAdapter<String> sideAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, sideList);
+        sideAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sideSpinner.setAdapter(sideAdapter);
+        sideSpinner.setSelection(Arrays.asList(sides).indexOf(Side.CHIPS));
+
+        sideSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                updatePrice();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
         Size[] sizes = Size.values();
         List<String> sizeList = new ArrayList<>();
         for (Size size : sizes) {
@@ -95,7 +124,17 @@ public class SideController extends AppCompatActivity {
         sizeSpinner.setAdapter(sizeAdapter);
         sizeSpinner.setSelection(Arrays.asList(sizes).indexOf(Size.MEDIUM));
 
+        sizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                updatePrice();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         minusBtn.setOnClickListener(v -> {
@@ -116,6 +155,11 @@ public class SideController extends AppCompatActivity {
 
     private void updatePrice() {
 
+        Side selectedSide = Side.valueOf(sideSpinner.getSelectedItem().toString());
+        Size selectedSize = Size.valueOf(sizeSpinner.getSelectedItem().toString());
+        Sides sides = new Sides(quantity, selectedSide, selectedSize);
+        double price = sides.price();
+        priceText.setText(currencyFormat.format(price));
 
     }
 
