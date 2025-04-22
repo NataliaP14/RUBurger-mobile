@@ -137,7 +137,7 @@ public class BurgerController extends AppCompatActivity {
         Burger tempBurger = new Burger(selectedBread, selectedAddOns, quantity, isDoublePatty);
         double price = tempBurger.price();
 
-        priceText.setText(currencyFormat.format(price));
+        priceText.setText(getString(R.string.price_placeholder, currencyFormat.format(price)));
     }
 
     private void updateAddOns() {
