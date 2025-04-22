@@ -65,7 +65,11 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"/>
 
-                <TextView android:text="@string/select_protein" android:layout_height="wrap_content" android:layout_width="wrap_content" />
+                <TextView android:text="@string/select_protein"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
                 <RadioGroup
                     android:id="@+id/proteinGroup"
                     android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="wrap_content">
@@ -74,7 +78,12 @@
                     <RadioButton android:id="@+id/chicken" android:text="@string/chicken" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
                 </RadioGroup>
 
-                <TextView android:text="@string/select_bread" android:layout_marginTop="16dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                <TextView android:text="@string/select_bread"
+                    android:layout_marginTop="16dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
                 <Spinner
                     android:id="@+id/breadSpinner"
                     android:layout_width="match_parent"
@@ -83,7 +92,12 @@
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/spinner_background"/>
 
-                <TextView android:text="@string/add_ons" android:layout_marginTop="16dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                <TextView android:text="@string/add_ons"
+                    android:layout_marginTop="16dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
                 <LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="wrap_content">
                     <CheckBox android:id="@+id/lettuce" android:text="@string/lettuce" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
                     <CheckBox android:id="@+id/tomato" android:text="@string/tomato" android:layout_height="wrap_content" android:layout_width="wrap_content"/>

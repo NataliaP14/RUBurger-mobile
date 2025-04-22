@@ -65,20 +65,48 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"/>
 
-                <TextView android:text="@string/select_patty" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
-                <RadioGroup android:id="@+id/pattyGroup" android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="wrap_content">
-                    <RadioButton android:id="@+id/singlePatty" android:text="@string/single_patty" android:checked="true" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
-                    <RadioButton android:id="@+id/doublePatty" android:text="@string/double_patty" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                <TextView android:text="@string/select_patty"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+                <RadioGroup
+                    android:id="@+id/pattyGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/singlePatty"
+                        android:checked="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/single_patty" />
+
+                    <RadioButton
+                        android:id="@+id/doublePatty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/double_patty" />
                 </RadioGroup>
 
-                <TextView android:text="@string/select_bread" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+
+                <TextView android:text="@string/select_bread"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
                 <RadioGroup android:id="@+id/breadGroup" android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="wrap_content">
                     <RadioButton android:id="@+id/brioche" android:text="@string/brioche" android:checked="true" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
                     <RadioButton android:id="@+id/wheat" android:text="@string/wheat" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
                     <RadioButton android:id="@+id/pretzel" android:text="@string/pretzel" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
                 </RadioGroup>
 
-                <TextView android:text="@string/add_ons" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                <TextView android:text="@string/add_ons"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
                 <LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="wrap_content">
                     <CheckBox android:id="@+id/lettuce" android:text="@string/lettuce" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
                     <CheckBox android:id="@+id/tomato" android:text="@string/tomato" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
