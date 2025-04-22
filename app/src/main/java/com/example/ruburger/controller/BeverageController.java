@@ -103,29 +103,38 @@ public class BeverageController extends AppCompatActivity {
         final int[] qty = { quantity };
         final Size[] selectedSize = { size };
 
+        updatePrice(qty[0], selectedSize[0], flavor, priceText);
+
         sizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 selectedSize[0] = Size.values()[pos];
+                updatePrice(qty[0], selectedSize[0], flavor, priceText);
             }
-            public void onNothingSelected(AdapterView<?> parent) {}
+            public void onNothingSelected(AdapterView<?> parent) {
+                
+            }
         });
 
         plus.setOnClickListener(v -> {
             qty[0]++;
             quantityText.setText(String.valueOf(qty[0]));
+            updatePrice(qty[0], selectedSize[0], flavor, priceText);
         });
 
         minus.setOnClickListener(v -> {
             if (qty[0] > 1) {
                 qty[0]--;
                 quantityText.setText(String.valueOf(qty[0]));
-
+                updatePrice(qty[0], selectedSize[0], flavor, priceText);
             }
         });
 
         dialog.show();
     }
 
-    private void updatePrice(Flavor flavor, int i, Size size) {
+    private void updatePrice(int quantity, Size size, Flavor flavor, TextView priceText) {
+        Beverage beverage = new Beverage(quantity, size, flavor);
+        double price = beverage.price();
+        priceText.setText(currencyFormat.format(price));
     }
 }
