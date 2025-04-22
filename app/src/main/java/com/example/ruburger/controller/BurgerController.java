@@ -23,25 +23,17 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 
 
-
 public class BurgerController extends AppCompatActivity {
-
-
     private RadioGroup pattyGroup, breadGroup;
     private CheckBox lettuce, tomato, onion, avocado, cheese;
     private ImageButton minusBtn, plusBtn;
     private TextView quantityText, priceText;
     private Button addToCartBtn;
-
     private int quantity = 1;
     private boolean isDoublePatty = false;
-    private Bread selectedBread = Bread.BRIOCHE;
+    private Bread selectedBread = null;
     private ArrayList<AddOns> selectedAddOns = new ArrayList<>();
-
     private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
-
-
-
 
 
     @Override
@@ -56,7 +48,7 @@ public class BurgerController extends AppCompatActivity {
             return insets;
         });
 
-        initializeViews();
+        initializeButtons();
         setupListeners();
         updatePrice();
 
@@ -65,7 +57,7 @@ public class BurgerController extends AppCompatActivity {
         menuButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-            finish(); // Optional: closes this screen so user doesn't return via back button
+            finish();
         });
 
         Button cartButton = findViewById(R.id.cartButton);
@@ -83,7 +75,7 @@ public class BurgerController extends AppCompatActivity {
     }
 
 
-    private void initializeViews() {
+    private void initializeButtons() {
 
         pattyGroup = findViewById(R.id.pattyGroup);
         breadGroup = findViewById(R.id.breadGroup);
@@ -100,7 +92,6 @@ public class BurgerController extends AppCompatActivity {
         priceText = findViewById(R.id.priceText);
 
     }
-
 
     private void setupListeners() {
         pattyGroup.setOnCheckedChangeListener((group, checkedId) -> {

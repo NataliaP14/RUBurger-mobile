@@ -24,6 +24,11 @@ public class Beverage extends MenuItem {
 		this.flavor = flavor;
 	}
 
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+
 	/**
 	 *  Gets the flavor of the beverage.
 	 * 	@return		The flavor of the beverage ordered.

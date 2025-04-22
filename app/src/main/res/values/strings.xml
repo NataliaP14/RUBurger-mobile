@@ -13,10 +13,10 @@
     <string name="cart">Cart</string>
     <string name="my_orders">My Orders</string>
     <string name = "menu">Main Menu</string>
-    <string name="customize_your_burger">Customize Your Perfect Bite\n</string>
-    <string name="select_patty">Select Patty\n</string>
+    <string name="customize_your_burger">Customize Your Perfect Bite</string>
+    <string name="select_patty">Select Patty</string>
     <string name="single_patty">Single Patty</string>
-    <string name="double_patty">Double Patty\n</string>
+    <string name="double_patty">Double Patty</string>
     <string name="brioche">Brioche</string>
     <string name="wheat">Wheat</string>
     <string name="pretzel">Pretzel</string>
@@ -30,4 +30,16 @@
     <string name="_1">1</string>
     <string name="price_placeholder">Price: $0.00</string>
     <string name="add_to_cart">Add To Cart</string>
+    <string name="select_protein">Select Protein</string>
+    <string name="salmon">Salmon</string>
+    <string name="roast_beef">Roast Beef</string>
+    <string name="chicken">Chicken</string>
+    <string name="decrease_quantity">Decrease quantity\n</string>
+    <string name="beverage_list_description">List of beverage options</string>
+    <string name="increase_quantity">increase quantity</string>
+    <string name="chips">chips</string>
+    <string name="sides">Sides</string>
+    <string name="choose_your_perfect_side">Choose Your Perfect Side</string>
+    <string name="select_side">Select Side</string>
+    <string name="select_size">Select Size</string>
 </resources>
