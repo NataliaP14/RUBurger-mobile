@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -29,43 +30,12 @@
         android:layout_height="0dp"
         android:contentDescription="@string/beverage_list_description"
         app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintBottom_toTopOf="@id/bottomControls"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/beverages"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-    <LinearLayout
-        android:id="@+id/bottomControls"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:gravity="center_vertical"
-        android:elevation="6dp"
         app:layout_constraintBottom_toTopOf="@id/bottomNav"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/beverages" />
 
-        <TextView
-            android:id="@+id/priceText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/price_placeholder"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_weight="1"/>
-
-        <Button
-            android:id="@+id/addToCartBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/add_to_cart"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#6e0512"/>
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/bottomNav"
