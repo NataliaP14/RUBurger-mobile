@@ -25,5 +25,7 @@
         <activity android:name=".controller.SandwichController"/>
         <activity android:name=".controller.BeverageController"/>
         <activity android:name=".controller.SideController"/>
+        <activity android:name=".controller.CurrentOrderController"/>
+        <activity android:name=".controller.PlacedOrderController"/>
     </application>
 </manifest>

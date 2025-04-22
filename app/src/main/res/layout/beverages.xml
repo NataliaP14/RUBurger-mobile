@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="12dp"
-    android:background="@drawable/card_bg">
+    android:background="@drawable/card_bg"
+    android:layout_margin="8dp">
 
     <ImageView
         android:id="@+id/beverageImage"
@@ -19,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:text="Flavor Name"
+        android:text="@string/flavor_name"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="#000"/>

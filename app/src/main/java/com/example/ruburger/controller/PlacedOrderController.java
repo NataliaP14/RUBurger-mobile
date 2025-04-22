@@ -1,5 +1,7 @@
 package com.example.ruburger.controller;
 
-public class PlacedOrderController {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class PlacedOrderController extends AppCompatActivity {
 
 }

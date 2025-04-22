@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -82,7 +83,6 @@ public class BeverageController extends AppCompatActivity {
     private void showBeverageDialog(Flavor flavor, int quantity, Size size) {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_beverage_popup);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         TextView flavorTitle = dialog.findViewById(R.id.dialogFlavorTitle);
         Spinner sizeSpinner = dialog.findViewById(R.id.dialogSizeSpinner);
