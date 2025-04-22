@@ -34,4 +34,7 @@
     <string name="salmon">Salmon</string>
     <string name="roast_beef">Roast Beef</string>
     <string name="chicken">Chicken</string>
+    <string name="decrease_quantity">Decrease quantity\n</string>
+    <string name="beverage_list_description">List of beverage options</string>
+    <string name="increase_quantity">increase quantity</string>
 </resources>
