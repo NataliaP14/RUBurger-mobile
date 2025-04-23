@@ -64,7 +64,7 @@ public class Burger extends Sandwich {
 
 		String pattyType = doublePatty ? "double" : "single";
 
-		return String.format("Burger, %s [%s] [%s] [%.2f] [%d]", pattyType, bread, addOnsString, price(), quantity);
+		return String.format("Burger [%s] [%s] [%s] [%.2f] [%d]", pattyType, bread, addOnsString, price(), quantity);
 	}
 
 }
