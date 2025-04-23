@@ -31,6 +31,7 @@ import com.example.ruburger.adapter.BeverageAdapter;
 import com.example.ruburger.model.Beverage;
 import com.example.ruburger.model.Flavor;
 import com.example.ruburger.model.Size;
+import com.example.ruburger.globaldata.OrderSingleton;
 
 import java.text.NumberFormat;
 import java.util.Arrays;
@@ -86,7 +87,7 @@ public class BeverageController extends AppCompatActivity {
             startActivity(new Intent(this, PlacedOrderController.class));
         });
 
-   
+
     }
 
     private void showBeverageDialog(Flavor flavor, int quantity, Size size) {
@@ -120,7 +121,7 @@ public class BeverageController extends AppCompatActivity {
                 updatePrice(qty[0], selectedSize[0], flavor, priceText);
             }
             public void onNothingSelected(AdapterView<?> parent) {
-                
+
             }
         });
 
@@ -139,6 +140,16 @@ public class BeverageController extends AppCompatActivity {
         });
 
         dialog.show();
+
+        addToCartBtn.setOnClickListener(v -> {
+            Beverage beverage = new Beverage(qty[0], selectedSize[0], flavor);
+            OrderSingleton.getInstance().addItem(beverage);
+
+            dialog.dismiss();
+
+        });
+
+
     }
 
     private void updatePrice(int quantity, Size size, Flavor flavor, TextView priceText) {

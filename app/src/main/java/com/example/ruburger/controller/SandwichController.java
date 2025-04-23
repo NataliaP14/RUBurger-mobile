@@ -25,6 +25,7 @@ import com.example.ruburger.model.AddOns;
 import com.example.ruburger.model.Bread;
 import com.example.ruburger.model.Sandwich;
 import com.example.ruburger.model.Protein;
+import com.example.ruburger.globaldata.OrderSingleton;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -39,9 +40,30 @@ public class SandwichController extends AppCompatActivity {
     private ImageButton minusBtn, plusBtn;
     private TextView quantityText, priceText;
     private Button addToCartBtn, makeItCombo;
+    private Bread selectedBread;
+    private Protein selectedProtein;
     private int quantity = 1;
     private ArrayList<AddOns> selectedAddOns = new ArrayList<>();
     private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
+
+
+    private Bread getSelectedBread() {
+        return Bread.valueOf(breadSpinner.getSelectedItem().toString());
+    }
+
+    private Protein getSelectedProtein() {
+        RadioGroup proteinGroup = findViewById(R.id.proteinGroup);
+        int selectedId = proteinGroup.getCheckedRadioButtonId();
+
+        if (selectedId == R.id.roastBeef) {
+            return Protein.ROAST_BEEF;
+        } else if (selectedId == R.id.salmon) {
+            return Protein.SALMON;
+        } else {
+            return Protein.CHICKEN;
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,6 +186,10 @@ public class SandwichController extends AppCompatActivity {
             updatePrice();
         });
 
+        addToCartBtn.setOnClickListener(v -> {
+            addSandwichToCart();
+        });
+
     }
 
     private void loadComboView() {
@@ -180,19 +206,9 @@ public class SandwichController extends AppCompatActivity {
 
     private void updatePrice() {
 
-        Bread selectedBread = Bread.valueOf(breadSpinner.getSelectedItem().toString());
+        selectedBread = getSelectedBread();
 
-        RadioGroup proteinGroup = findViewById(R.id.proteinGroup);
-        int selectedId = proteinGroup.getCheckedRadioButtonId();
-
-        Protein selectedProtein;
-        if (selectedId == R.id.roastBeef) {
-            selectedProtein = Protein.ROAST_BEEF;
-        } else if (selectedId == R.id.salmon) {
-            selectedProtein = Protein.SALMON;
-        } else {
-            selectedProtein = Protein.CHICKEN;
-        }
+        selectedProtein = getSelectedProtein();
 
         updateAddOns();
 
@@ -212,5 +228,17 @@ public class SandwichController extends AppCompatActivity {
         if (cheese.isChecked()) selectedAddOns.add(AddOns.CHEESE);
     }
 
+
+    private void addSandwichToCart() {
+
+        selectedBread = getSelectedBread();
+
+        selectedProtein = getSelectedProtein();
+
+        updateAddOns();
+
+        Sandwich sandwich = new Sandwich(quantity, selectedBread, selectedProtein, selectedAddOns);
+        OrderSingleton.getInstance().addItem(sandwich);
+    }
 
 }
