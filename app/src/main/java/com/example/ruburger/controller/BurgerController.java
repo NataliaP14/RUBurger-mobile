@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.ImageButton;
@@ -67,15 +68,15 @@ public class BurgerController extends AppCompatActivity {
         updatePrice();
 
 
-        Button menuButton = findViewById(R.id.menuButton);
+        LinearLayout menuButton = findViewById(R.id.menuButton);
         menuButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
         });
 
-        Button cartButton = findViewById(R.id.cartButton);
-        Button ordersButton = findViewById(R.id.ordersButton);
+        LinearLayout cartButton = findViewById(R.id.cartButton);
+        LinearLayout ordersButton = findViewById(R.id.ordersButton);
 
         cartButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, CurrentOrderController.class);

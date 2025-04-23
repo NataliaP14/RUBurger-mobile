@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,15 +40,15 @@ public class PlacedOrderController extends AppCompatActivity {
 
 
 
-        Button menuButton = findViewById(R.id.menuButton);
+        LinearLayout menuButton = findViewById(R.id.menuButton);
         menuButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
         });
 
-        Button cartButton = findViewById(R.id.cartButton);
-        Button ordersButton = findViewById(R.id.ordersButton);
+        LinearLayout cartButton = findViewById(R.id.cartButton);
+        LinearLayout ordersButton = findViewById(R.id.ordersButton);
 
         cartButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, CurrentOrderController.class);

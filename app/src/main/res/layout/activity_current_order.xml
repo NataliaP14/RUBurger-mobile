@@ -77,6 +77,7 @@
             android:layout_margin="16dp" />
 
         <LinearLayout
+            style="?android:attr/buttonBarStyle"
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_width="match_parent"
@@ -85,8 +86,9 @@
 
             <Button
                 android:id="@+id/removeItemBtn"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:text="@string/remove_order_item"
                 android:backgroundTint="#BA2B3E"
                 android:textColor="#FFFFFF"
@@ -94,8 +96,9 @@
 
             <Button
                 android:id="@+id/placeOrderBtn"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:text="@string/place_order"
                 android:backgroundTint="#BA2B3E"
                 android:textColor="#FFFFFF" />
@@ -106,39 +109,104 @@
         android:id="@+id/bottomNav"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:gravity="center"
         android:padding="12dp"
-        android:orientation="horizontal"
         android:background="#871826"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <Button
+        <LinearLayout
             android:id="@+id/menuButton"
-            android:text="@string/menu"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#BA2B3E"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"/>
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="48dp">
 
-        <Button
+            <ImageView
+                android:id="@+id/menuIcon"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/home"
+                android:contentDescription="@string/menu"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:id="@+id/menuLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/menu"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/cartButton"
-            android:text="@string/cart"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#BA2B3E"
-            android:layout_marginStart="8dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"/>
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            android:layout_marginBottom="4dp">
 
-        <Button
+            <ImageView
+                android:id="@+id/cartIcon"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/shopping_cart"
+                android:contentDescription="@string/cart"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:id="@+id/cartLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cart"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
             android:id="@+id/ordersButton"
-            android:text="@string/my_orders"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#BA2B3E"
-            android:layout_marginStart="8dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"/>
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="48dp">
+
+            <ImageView
+                android:id="@+id/ordersIcon"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/order"
+                android:contentDescription="@string/my_orders"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:id="@+id/ordersLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_orders"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

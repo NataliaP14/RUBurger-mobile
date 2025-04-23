@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -93,23 +94,23 @@ public class SandwichController extends AppCompatActivity {
         updatePrice();
 
 
-        Button menuButton = findViewById(R.id.menuButton);
+        LinearLayout menuButton = findViewById(R.id.menuButton);
         menuButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
         });
 
-        Button cartButton = findViewById(R.id.cartButton);
-        Button ordersButton = findViewById(R.id.ordersButton);
+        LinearLayout cartButton = findViewById(R.id.cartButton);
+        LinearLayout ordersButton = findViewById(R.id.ordersButton);
 
         cartButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, CurrentOrderController.class); // Replace with actual cart screen class
+            Intent intent = new Intent(this, CurrentOrderController.class);
             startActivity(intent);
         });
 
         ordersButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, PlacedOrderController.class); // Replace with actual orders screen class
+            Intent intent = new Intent(this, PlacedOrderController.class);
             startActivity(intent);
         });
     }
