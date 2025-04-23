@@ -21,8 +21,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.ruburger.R;
+import com.example.ruburger.globaldata.ComboSingleton;
 import com.example.ruburger.model.AddOns;
 import com.example.ruburger.model.Bread;
+import com.example.ruburger.model.Burger;
 import com.example.ruburger.model.Sandwich;
 import com.example.ruburger.model.Protein;
 import com.example.ruburger.globaldata.OrderSingleton;
@@ -130,6 +132,7 @@ public class SandwichController extends AppCompatActivity {
         makeItCombo = findViewById(R.id.makeItCombo);
 
 
+
     }
 
     private void setupListeners() {
@@ -194,13 +197,15 @@ public class SandwichController extends AppCompatActivity {
 
     private void loadComboView() {
         makeItCombo.setOnClickListener(v -> {
+            updateAddOns();
+            Sandwich sandwich = new Sandwich(quantity, selectedBread, selectedProtein, new ArrayList<>(selectedAddOns));
+            ComboSingleton.getInstance().setMainItem(sandwich);
             Intent intent = new Intent(this, ComboController.class);
             startActivity(intent);
         });
     }
 
     private void goToCombo() {
-
         loadComboView();
     }
 
@@ -212,10 +217,10 @@ public class SandwichController extends AppCompatActivity {
 
         updateAddOns();
 
-        Sandwich tempSandwich = new Sandwich(quantity, selectedBread, selectedProtein, selectedAddOns);
+        Sandwich sandwich = new Sandwich(quantity, selectedBread, selectedProtein, selectedAddOns);
 
-        double price = tempSandwich.price();
-        priceText.setText(currencyFormat.format(price));
+        double price = sandwich.price();
+        priceText.setText(getString(R.string.price_placeholder, currencyFormat.format(price)));
     }
 
     private void updateAddOns() {

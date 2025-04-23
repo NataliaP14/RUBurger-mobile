@@ -9,8 +9,10 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,10 +24,29 @@ import com.example.ruburger.R;
 import com.example.ruburger.model.Beverage;
 import com.example.ruburger.model.Side;
 import com.example.ruburger.model.Flavor;
+import com.example.ruburger.model.Combo;
+import com.example.ruburger.globaldata.ComboSingleton;
+import com.example.ruburger.globaldata.OrderSingleton;
+import com.example.ruburger.model.Sandwich;
+import com.example.ruburger.model.Size;
+
+import java.text.NumberFormat;
+
 
 public class ComboController extends AppCompatActivity {
     private Spinner sideSpinner, drinkSpinner;
     private ImageView sideIcon, drinkIcon;
+
+    private ImageButton minusBtn, plusBtn;
+
+    private TextView sandwichDetails, quantityText, priceText;
+    private Button addToCartBtn;
+    private int quantity = 1;
+
+    private static final Size MEDIUM_DRINK = Size.MEDIUM;
+
+    private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +100,14 @@ public class ComboController extends AppCompatActivity {
 
         drinkSpinner = findViewById(R.id.drinkSpinner);
         drinkIcon = findViewById(R.id.drinkIcon);
+
+        minusBtn = findViewById(R.id.minusBtn);
+        plusBtn = findViewById(R.id.plusBtn);
+        quantityText = findViewById(R.id.quantityText);
+
+        sandwichDetails = findViewById(R.id.sandwichDetails);
+        priceText = findViewById(R.id.priceText);
+        addToCartBtn = findViewById(R.id.addToCart);
     }
     private void setupAdapters() {
 
@@ -105,6 +134,20 @@ public class ComboController extends AppCompatActivity {
     }
 
     private void setupListeners() {
+        minusBtn.setOnClickListener(v -> {
+            if (quantity > 1) {
+                quantity--;
+                quantityText.setText(String.valueOf(quantity));
+                updatePrice();
+            }
+        });
+
+        plusBtn.setOnClickListener(v -> {
+            quantity++;
+            quantityText.setText(String.valueOf(quantity));
+            updatePrice();
+        });
+
         drinkSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -121,6 +164,7 @@ public class ComboController extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+
         });
 
         sideSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -142,6 +186,17 @@ public class ComboController extends AppCompatActivity {
     }
 
     private void updatePrice() {
+        Sandwich mainItem = ComboSingleton.getInstance().getMainItem();
+        Flavor flavor = (Flavor) drinkSpinner.getSelectedItem();
+        Side side = (Side) sideSpinner.getSelectedItem();
+
+        Beverage drink = new Beverage(1, MEDIUM_DRINK, flavor);
+        Combo combo = new Combo(quantity, mainItem, drink, side);
+
+        double price = combo.price();
+
+        sandwichDetails.setText(mainItem.toString());
+        priceText.setText(getString(R.string.price_placeholder, currencyFormat.format(price)));
 
     }
 }
