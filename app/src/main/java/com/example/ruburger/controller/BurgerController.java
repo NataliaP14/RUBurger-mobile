@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -93,6 +94,7 @@ public class BurgerController extends AppCompatActivity {
         pattyGroup = findViewById(R.id.pattyGroup);
         breadGroup = findViewById(R.id.breadGroup);
 
+        selectedBread = Bread.BRIOCHE;
         lettuce = findViewById(R.id.lettuce);
         tomato = findViewById(R.id.tomato);
         onion = findViewById(R.id.onion);
@@ -193,6 +195,8 @@ public class BurgerController extends AppCompatActivity {
         Burger burger = new Burger(selectedBread, new ArrayList<>(selectedAddOns), quantity, isDoublePatty);
 
         OrderSingleton.getInstance().addItem(burger);
+
+        Toast.makeText(this, "Burger added to your order!", Toast.LENGTH_SHORT).show();
 
     }
 

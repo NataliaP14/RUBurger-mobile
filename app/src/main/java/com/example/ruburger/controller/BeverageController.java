@@ -144,6 +144,7 @@ public class BeverageController extends AppCompatActivity {
         addToCartBtn.setOnClickListener(v -> {
             Beverage beverage = new Beverage(qty[0], selectedSize[0], flavor);
             OrderSingleton.getInstance().addItem(beverage);
+            Toast.makeText(this, "Beverage added to your order!", Toast.LENGTH_SHORT).show();
 
             dialog.dismiss();
 

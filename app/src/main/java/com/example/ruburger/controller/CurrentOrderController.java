@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,7 @@ public class CurrentOrderController extends AppCompatActivity {
     private ArrayAdapter<String> orderAdapter;
     private List<String> orderDisplayList;
     private int selectedItemPosition = -1;
+    private static final double NJ_TAX_RATE = 0.06625;
 
 
 
@@ -56,6 +58,10 @@ public class CurrentOrderController extends AppCompatActivity {
 
         }
 
+        initializeViews();
+        setupListeners();
+        updateOrderDisplay();
+
         Button menuButton = findViewById(R.id.menuButton);
         menuButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
@@ -76,5 +82,108 @@ public class CurrentOrderController extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateOrderDisplay();
+    }
+
+    private void initializeViews() {
+        orderItemsList = findViewById(R.id.orderItemsList);
+        removeItemBtn = findViewById(R.id.removeItemBtn);
+        placeOrderBtn = findViewById(R.id.placeOrderBtn);
+        subtotal = findViewById(R.id.subtotal);
+        salesTax = findViewById(R.id.salesTax);
+        totalAmount = findViewById(R.id.totalAmount);
+
+        orderDisplayList = new ArrayList<>();
+        orderAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, orderDisplayList);
+        orderItemsList.setAdapter(orderAdapter);
+        orderItemsList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+    }
+
+
+    private void setupListeners() {
+        orderItemsList.setOnItemClickListener((parent, view, position, id) -> {
+            selectedItemPosition = position;
+        });
+
+        removeItemBtn.setOnClickListener(v -> removeSelectedItem());
+
+        placeOrderBtn.setOnClickListener(v -> placeOrder());
+
+    }
+
+    private void updateOrderDisplay() {
+
+        OrderSingleton orderSingleton = OrderSingleton.getInstance();
+        List<MenuItem> currentOrder = orderSingleton.getCurrentOrder();
+
+        orderDisplayList.clear();
+
+        if (currentOrder.isEmpty()) {
+            removeItemBtn.setEnabled(false);
+            placeOrderBtn.setEnabled(false);
+        } else {
+            removeItemBtn.setEnabled(true);
+            placeOrderBtn.setEnabled(true);
+
+            for (MenuItem item : currentOrder) {
+                orderDisplayList.add(item.toString());
+            }
+        }
+
+        orderAdapter.notifyDataSetChanged();
+        updateOrderTotals();
+
+    }
+
+    private void updateOrderTotals() {
+        OrderSingleton orderSingleton = OrderSingleton.getInstance();
+        double subtotalValue = orderSingleton.getOrderTotal();
+        double taxValue = subtotalValue * NJ_TAX_RATE;
+        double totalValue = subtotalValue + taxValue;
+
+        subtotal.setText(getString(R.string.subtotal, currencyFormat.format(subtotalValue)));
+        salesTax.setText(getString(R.string.sales_tax, currencyFormat.format(taxValue)));
+        totalAmount.setText(getString(R.string.total, currencyFormat.format(totalValue)));
+    }
+
+    public void removeSelectedItem() {
+        if (selectedItemPosition >= 0 && !OrderSingleton.getInstance().isEmpty()) {
+            OrderSingleton orderSingleton = OrderSingleton.getInstance();
+            if (orderSingleton.removeItem(selectedItemPosition)) {
+                Toast.makeText(this, "Item removed", Toast.LENGTH_SHORT).show();
+                selectedItemPosition = -1;
+                updateOrderDisplay();
+            }
+        } else {
+            Toast.makeText(this, "Please select an item to remove", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void placeOrder() {
+        OrderSingleton orderSingleton = OrderSingleton.getInstance();
+
+        if (!orderSingleton.isEmpty()) {
+
+            // gonna add the part where we save the order to the array list (for the placed orders) here
+
+            orderSingleton.placeOrder();
+            orderSingleton.getCurrentOrder().clear();
+            orderSingleton.updateOrderTotal();
+
+            selectedItemPosition = -1;
+            updateOrderDisplay();
+
+            Toast.makeText(this, "Order #" + OrderSingleton.getInstance().getCurrentOrderNumber() + " placed successfully!", Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(this, "Your cart is empty", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
 }

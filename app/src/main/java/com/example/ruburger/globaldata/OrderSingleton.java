@@ -4,18 +4,41 @@ import com.example.ruburger.model.MenuItem;
 
 import java.util.List;
 
-
 public final class OrderSingleton {
     private static OrderSingleton instance;
     private List<MenuItem> currentOrder;
     private double orderTotal;
+    private int currentOrderNumber = 0;
 
+    private static class PlacedOrder {
+        private int orderNumber;
+        private List<MenuItem> items;
+
+        public PlacedOrder(int orderNumber, List<MenuItem> items) {
+            this.orderNumber = orderNumber;
+            this.items = items;
+        }
+
+
+        public int getOrderNumber() {
+            return orderNumber;
+        }
+
+        public List<MenuItem> getItems() {
+            return items;
+        }
+    }
+
+    private List<PlacedOrder> placedOrders;
+
+   
     private OrderSingleton() {
 
     }
     public void setCurrentOrder(List<MenuItem> currentOrder) {
         this.currentOrder = currentOrder;
     }
+
 
     public List<MenuItem> getCurrentOrder() {
         return currentOrder;
@@ -56,5 +79,40 @@ public final class OrderSingleton {
         return currentOrder.isEmpty();
     }
 
+    public int getCurrentOrderNumber() {
+        return currentOrderNumber;
+    }
 
+    public int placeOrder() {
+        if (!currentOrder.isEmpty()) {
+            List<MenuItem> orderCopy = new ArrayList<>(currentOrder);
+            PlacedOrder placedOrder = new PlacedOrder(currentOrderNumber, orderCopy);
+            placedOrders.add(placedOrder);
+
+            int placedOrderNumber = currentOrderNumber;
+            currentOrder.clear();
+            orderTotal = 0.0;
+            currentOrderNumber++;
+
+            return placedOrderNumber;
+        }
+        return -1;
+    }
+
+    public List<MenuItem> getPlacedOrder(int orderNumber) {
+        for (PlacedOrder order : placedOrders) {
+            if (order.getOrderNumber() == orderNumber) {
+                return order.getItems();
+            }
+        }
+        return null;
+    }
+
+    public List<Integer> getAllOrderNumbers() {
+        List<Integer> orderNumbers = new ArrayList<>();
+        for (PlacedOrder order : placedOrders) {
+            orderNumbers.add(order.getOrderNumber());
+        }
+        return orderNumbers;
+    }
 }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.ImageButton;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -195,6 +196,7 @@ public class SideController extends AppCompatActivity {
 
         Sides sides = new Sides(quantity, selectedSide, selectedSize);
         OrderSingleton.getInstance().addItem(sides);
+        Toast.makeText(this, "Side added to your order!", Toast.LENGTH_SHORT).show();
     }
 
 }
