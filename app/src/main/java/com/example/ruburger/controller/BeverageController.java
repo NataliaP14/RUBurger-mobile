@@ -156,6 +156,6 @@ public class BeverageController extends AppCompatActivity {
     private void updatePrice(int quantity, Size size, Flavor flavor, TextView priceText) {
         Beverage beverage = new Beverage(quantity, size, flavor);
         double price = beverage.price();
-        priceText.setText(currencyFormat.format(price));
+        priceText.setText(getString(R.string.price_placeholder, currencyFormat.format(price)));
     }
 }

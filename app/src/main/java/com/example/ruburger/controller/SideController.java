@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ImageButton;
@@ -66,23 +67,23 @@ public class SideController extends AppCompatActivity {
         updatePrice();
 
 
-        Button menuButton = findViewById(R.id.menuButton);
+        LinearLayout menuButton = findViewById(R.id.menuButton);
         menuButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
         });
 
-        Button cartButton = findViewById(R.id.cartButton);
-        Button ordersButton = findViewById(R.id.ordersButton);
+        LinearLayout cartButton = findViewById(R.id.cartButton);
+        LinearLayout ordersButton = findViewById(R.id.ordersButton);
 
         cartButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, CurrentOrderController.class); // Replace with actual cart screen class
+            Intent intent = new Intent(this, CurrentOrderController.class);
             startActivity(intent);
         });
 
         ordersButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, PlacedOrderController.class); // Replace with actual orders screen class
+            Intent intent = new Intent(this, PlacedOrderController.class);
             startActivity(intent);
         });
     }
@@ -186,7 +187,7 @@ public class SideController extends AppCompatActivity {
 
         Sides sides = new Sides(quantity, selectedSide, selectedSize);
         double price = sides.price();
-        priceText.setText(currencyFormat.format(price));
+        priceText.setText(getString(R.string.price_placeholder, currencyFormat.format(price)));
 
     }
 

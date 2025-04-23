@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout sandwichBox = findViewById(R.id.sandwichBox);
         LinearLayout beverageBox = findViewById(R.id.beverageBox);
         LinearLayout sideBox = findViewById(R.id.sideBox);
-        Button cartButton = findViewById(R.id.cartButton);
-        Button ordersButton = findViewById(R.id.ordersButton);
+        LinearLayout cartButton = findViewById(R.id.cartButton);
+        LinearLayout ordersButton = findViewById(R.id.ordersButton);
 
 
         burgerBox.setOnClickListener(v -> startActivity(new Intent(this, BurgerController.class)));
