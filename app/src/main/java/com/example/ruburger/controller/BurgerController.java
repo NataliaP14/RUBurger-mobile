@@ -18,6 +18,7 @@ import com.example.ruburger.R;
 import com.example.ruburger.model.Burger;
 import com.example.ruburger.model.AddOns;
 import com.example.ruburger.model.Bread;
+import com.example.ruburger.globaldata.OrderSingleton;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -91,6 +92,7 @@ public class BurgerController extends AppCompatActivity {
         quantityText = findViewById(R.id.quantityText);
         priceText = findViewById(R.id.priceText);
 
+        addToCartBtn = findViewById(R.id.addToCart);
     }
 
     private void setupListeners() {
@@ -131,6 +133,10 @@ public class BurgerController extends AppCompatActivity {
             updatePrice();
         });
 
+        addToCartBtn.setOnClickListener(v -> {
+            addBurgerToCart();
+        });
+
     }
 
     private void updatePrice() {
@@ -149,6 +155,16 @@ public class BurgerController extends AppCompatActivity {
         if (avocado.isChecked()) selectedAddOns.add(AddOns.AVOCADO);
         if (cheese.isChecked()) selectedAddOns.add(AddOns.CHEESE);
     }
+
+
+    private void addBurgerToCart() {
+        Burger burger = new Burger(selectedBread, new ArrayList<>(selectedAddOns), quantity, isDoublePatty);
+
+        OrderSingleton.getInstance().addItem(burger);
+
+    }
+
+
 
 
 }

@@ -159,7 +159,7 @@
 
 
                 <Button
-                    android:id="@+id/addToOrderBtn"
+                    android:id="@+id/addToCartBtn"
                     android:text="@string/add_to_cart"
                     android:textColor="#fff"
                     android:backgroundTint="#BA2B3E"

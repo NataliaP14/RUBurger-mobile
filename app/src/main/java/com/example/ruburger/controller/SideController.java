@@ -17,10 +17,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.ruburger.R;
-import com.example.ruburger.model.Bread;
 import com.example.ruburger.model.Size;
 import com.example.ruburger.model.Side;
 import com.example.ruburger.model.Sides;
+import com.example.ruburger.globaldata.OrderSingleton;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -35,6 +35,8 @@ public class SideController extends AppCompatActivity {
     private TextView quantityText, priceText;
     private Button addToCartBtn;
     private int quantity = 1;
+    private Side selectedSide;
+    private Size selectedSize;
     private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
     @Override
@@ -84,6 +86,7 @@ public class SideController extends AppCompatActivity {
         priceText = findViewById(R.id.priceText);
         sizeSpinner = findViewById(R.id.sizeSpinner);
         sideSpinner = findViewById(R.id.sideSpinner);
+        addToCartBtn = findViewById(R.id.addToCartBtn);
 
     }
 
@@ -151,18 +154,39 @@ public class SideController extends AppCompatActivity {
             updatePrice();
         });
 
+        addToCartBtn.setOnClickListener(v -> {
+            addSideToCart();
+        });
+
     }
 
-    private void updatePrice() {
 
-        Side selectedSide = Side.valueOf(sideSpinner.getSelectedItem().toString());
-        Size selectedSize = Size.valueOf(sizeSpinner.getSelectedItem().toString());
+    private Side getSide() {
+        return Side.valueOf(sideSpinner.getSelectedItem().toString());
+    }
+
+    private Size getSize() {
+        return Size.valueOf(sizeSpinner.getSelectedItem().toString());
+    }
+
+
+    private void updatePrice() {
+        Side selectedSide = getSide();
+        Size selectedSize = getSize();
+
         Sides sides = new Sides(quantity, selectedSide, selectedSize);
         double price = sides.price();
         priceText.setText(currencyFormat.format(price));
 
     }
 
+    private void addSideToCart() {
+        Side selectedSide = getSide();
+        Size selectedSize = getSize();
+
+        Sides sides = new Sides(quantity, selectedSide, selectedSize);
+        OrderSingleton.getInstance().addItem(sides);
+    }
 
 }
 

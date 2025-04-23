@@ -3,6 +3,9 @@ package com.example.ruburger.controller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.ArrayAdapter;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,9 +14,24 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.ruburger.R;
+import com.example.ruburger.globaldata.OrderSingleton;
+import com.example.ruburger.model.MenuItem;
 
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CurrentOrderController extends AppCompatActivity {
+
+    private ListView orderItemsList;
+    private Button removeItemBtn, placeOrderBtn;
+    private TextView subtotal, salesTax, totalAmount;
+    private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
+    private ArrayAdapter<String> orderAdapter;
+    private List<String> orderDisplayList;
+    private int selectedItemPosition = -1;
+
+
 
 
     @Override
