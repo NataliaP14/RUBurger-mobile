@@ -13,6 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -239,6 +240,8 @@ public class SandwichController extends AppCompatActivity {
 
         Sandwich sandwich = new Sandwich(quantity, selectedBread, selectedProtein, selectedAddOns);
         OrderSingleton.getInstance().addItem(sandwich);
+
+        Toast.makeText(this, "Sandwich added to your order!", Toast.LENGTH_SHORT).show();
     }
 
 }

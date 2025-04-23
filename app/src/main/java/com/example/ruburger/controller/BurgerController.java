@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,7 +36,7 @@ public class BurgerController extends AppCompatActivity {
     private Button addToCartBtn, makeItCombo;
     private int quantity = 1;
     private boolean isDoublePatty = false;
-    private Bread selectedBread = null;
+    private Bread selectedBread;
     private ArrayList<AddOns> selectedAddOns = new ArrayList<>();
     private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
@@ -92,6 +93,7 @@ public class BurgerController extends AppCompatActivity {
         pattyGroup = findViewById(R.id.pattyGroup);
         breadGroup = findViewById(R.id.breadGroup);
 
+        selectedBread = Bread.BRIOCHE;
         lettuce = findViewById(R.id.lettuce);
         tomato = findViewById(R.id.tomato);
         onion = findViewById(R.id.onion);
@@ -187,6 +189,8 @@ public class BurgerController extends AppCompatActivity {
         Burger burger = new Burger(selectedBread, new ArrayList<>(selectedAddOns), quantity, isDoublePatty);
 
         OrderSingleton.getInstance().addItem(burger);
+
+        Toast.makeText(this, "Burger added to your order!", Toast.LENGTH_SHORT).show();
 
     }
 

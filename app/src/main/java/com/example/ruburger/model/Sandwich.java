@@ -85,7 +85,7 @@ public class Sandwich extends MenuItem {
 			}
 		}
 
-		return String.format("Sandwich [%s %s] [%s] [%.2f] [%d]", bread, protein, addOnsString, price(), quantity);
+		return String.format("Sandwich [%s] [%s] [%s] [%.2f] [%d]", bread, protein, addOnsString, price(), quantity);
 	}
 
 }
