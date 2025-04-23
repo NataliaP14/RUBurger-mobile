@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.ruburger.R;
 import com.example.ruburger.model.Beverage;
+import com.example.ruburger.model.Burger;
 import com.example.ruburger.model.Side;
 import com.example.ruburger.model.Flavor;
 import com.example.ruburger.model.Combo;
@@ -31,6 +33,7 @@ import com.example.ruburger.model.Sandwich;
 import com.example.ruburger.model.Size;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 
 public class ComboController extends AppCompatActivity {
@@ -148,6 +151,10 @@ public class ComboController extends AppCompatActivity {
             updatePrice();
         });
 
+        addToCartBtn.setOnClickListener(v -> {
+            addComboToCart();
+        });
+
         drinkSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -197,6 +204,20 @@ public class ComboController extends AppCompatActivity {
 
         sandwichDetails.setText(mainItem.toString());
         priceText.setText(getString(R.string.price_placeholder, currencyFormat.format(price)));
+
+    }
+
+    private void addComboToCart() {
+        Sandwich mainItem = ComboSingleton.getInstance().getMainItem();
+        Flavor flavor = (Flavor) drinkSpinner.getSelectedItem();
+        Side side = (Side) sideSpinner.getSelectedItem();
+
+        Beverage drink = new Beverage(1, MEDIUM_DRINK, flavor);
+        Combo combo = new Combo(quantity, mainItem, drink, side);
+
+        OrderSingleton.getInstance().addItem(combo);
+
+        Toast.makeText(this, "Combo added to your order!", Toast.LENGTH_SHORT).show();
 
     }
 }
