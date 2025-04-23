@@ -48,4 +48,11 @@
     <string name="total">Total: $0.00</string>
     <string name="remove_order_item">Remove Order Item</string>
     <string name="place_order">Place Order</string>
+    <string name="combo">Combo</string>
+    <string name="select_drink">Select Drink</string>
+    <string name="make_it_combo">Make it a Combo</string>
+    <string name="sandwich_placeholder">Loading Details...</string>
+    <string name="minus">Minus Button\n</string>
+    <string name="plus">Plus Button</string>
+    <string name="cancel_button">Cancel Order</string>
 </resources>
