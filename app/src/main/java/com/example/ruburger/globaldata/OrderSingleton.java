@@ -2,7 +2,6 @@ package com.example.ruburger.globaldata;
 
 import com.example.ruburger.model.MenuItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public final class OrderSingleton {
@@ -20,6 +19,7 @@ public final class OrderSingleton {
             this.items = items;
         }
 
+
         public int getOrderNumber() {
             return orderNumber;
         }
@@ -31,11 +31,14 @@ public final class OrderSingleton {
 
     private List<PlacedOrder> placedOrders;
 
+   
     private OrderSingleton() {
-        currentOrder = new ArrayList<>();
-        placedOrders = new ArrayList<>();
-        orderTotal = 0.0;
+
     }
+    public void setCurrentOrder(List<MenuItem> currentOrder) {
+        this.currentOrder = currentOrder;
+    }
+
 
     public List<MenuItem> getCurrentOrder() {
         return currentOrder;

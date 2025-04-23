@@ -23,6 +23,7 @@ import com.example.ruburger.model.Burger;
 import com.example.ruburger.model.AddOns;
 import com.example.ruburger.model.Bread;
 import com.example.ruburger.globaldata.OrderSingleton;
+import com.example.ruburger.globaldata.ComboSingleton;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -108,6 +109,8 @@ public class BurgerController extends AppCompatActivity {
         addToCartBtn = findViewById(R.id.addToCart);
         makeItCombo = findViewById(R.id.makeItCombo);
 
+        selectedBread = Bread.BRIOCHE;
+
     }
 
     private void setupListeners() {
@@ -157,13 +160,16 @@ public class BurgerController extends AppCompatActivity {
 
     private void loadComboView() {
         makeItCombo.setOnClickListener(v -> {
+            updateAddOns();
+
+            Burger burger = new Burger(selectedBread, new ArrayList<>(selectedAddOns), quantity, isDoublePatty);
+            ComboSingleton.getInstance().setMainItem(burger);
             Intent intent = new Intent(this, ComboController.class);
             startActivity(intent);
         });
     }
 
     private void goToCombo() {
-
         loadComboView();
     }
 
