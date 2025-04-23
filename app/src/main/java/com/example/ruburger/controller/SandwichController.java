@@ -82,17 +82,10 @@ public class SandwichController extends AppCompatActivity {
             return insets;
         });
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-
-        }
-
         initializeButtons();
         setupListeners();
         goToCombo();
         updatePrice();
-
 
         LinearLayout menuButton = findViewById(R.id.menuButton);
         menuButton.setOnClickListener(v -> {
@@ -104,17 +97,10 @@ public class SandwichController extends AppCompatActivity {
         LinearLayout cartButton = findViewById(R.id.cartButton);
         LinearLayout ordersButton = findViewById(R.id.ordersButton);
 
-        cartButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, CurrentOrderController.class);
-            startActivity(intent);
-        });
+        cartButton.setOnClickListener(v -> { Intent intent = new Intent(this, CurrentOrderController.class); startActivity(intent); });
 
-        ordersButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, PlacedOrderController.class);
-            startActivity(intent);
-        });
+        ordersButton.setOnClickListener(v -> { Intent intent = new Intent(this, PlacedOrderController.class); startActivity(intent); });
     }
-
 
     private void initializeButtons() {
 
@@ -133,24 +119,17 @@ public class SandwichController extends AppCompatActivity {
         addToCartBtn = findViewById(R.id.addToCart);
         makeItCombo = findViewById(R.id.makeItCombo);
 
-
-
     }
 
     private void setupListeners() {
-        //I wanted to set the bread values up to see how it would look pls dont be mad
-
         Bread[] breads = Bread.values();
         List<String> breadList = new ArrayList<>();
-        for (Bread b : breads) {
-            breadList.add(b.name());
-        }
+        for (Bread b : breads) { breadList.add(b.name()); }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, breadList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         breadSpinner.setAdapter(adapter);
         breadSpinner.setSelection(Arrays.asList(breads).indexOf(Bread.BRIOCHE));
-
 
         breadSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -159,42 +138,23 @@ public class SandwichController extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
+            public void onNothingSelected(AdapterView<?> parent) { } });
 
         RadioGroup proteinGroup = findViewById(R.id.proteinGroup);
         proteinGroup.setOnCheckedChangeListener((group, checkedId) -> updatePrice());
-
 
         CheckBox [] checkBoxes = {lettuce, tomato, onion, avocado, cheese};
         for (CheckBox checkBox : checkBoxes) {
             checkBox.setOnCheckedChangeListener(((buttonView, isChecked) -> {
                 updateAddOns();
-                updatePrice();
-            }));
+                updatePrice(); }));
         }
 
-        minusBtn.setOnClickListener(v -> {
-            if (quantity > 1) {
-                quantity--;
-                quantityText.setText(String.valueOf(quantity));
-                updatePrice();
-            }
-        });
+        minusBtn.setOnClickListener(v -> { if (quantity > 1) { quantity--; quantityText.setText(String.valueOf(quantity)); updatePrice(); } });
 
-        plusBtn.setOnClickListener(v -> {
-            quantity++;
-            quantityText.setText(String.valueOf(quantity));
-            updatePrice();
-        });
+        plusBtn.setOnClickListener(v -> { quantity++; quantityText.setText(String.valueOf(quantity)); updatePrice();});
 
-        addToCartBtn.setOnClickListener(v -> {
-            addSandwichToCart();
-        });
-
+        addToCartBtn.setOnClickListener(v -> { addSandwichToCart(); });
     }
 
     private void loadComboView() {

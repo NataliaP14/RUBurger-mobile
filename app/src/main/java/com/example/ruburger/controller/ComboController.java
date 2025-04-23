@@ -24,7 +24,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.ruburger.R;
 import com.example.ruburger.model.Beverage;
-import com.example.ruburger.model.Burger;
 import com.example.ruburger.model.Side;
 import com.example.ruburger.model.Flavor;
 import com.example.ruburger.model.Combo;
@@ -32,10 +31,7 @@ import com.example.ruburger.globaldata.ComboSingleton;
 import com.example.ruburger.globaldata.OrderSingleton;
 import com.example.ruburger.model.Sandwich;
 import com.example.ruburger.model.Size;
-
 import java.text.NumberFormat;
-import java.util.ArrayList;
-
 
 public class ComboController extends AppCompatActivity {
     private Spinner sideSpinner, drinkSpinner;
@@ -46,9 +42,7 @@ public class ComboController extends AppCompatActivity {
     private TextView sandwichDetails, quantityText, priceText;
     private Button addToCartBtn;
     private int quantity = 1;
-
     private static final Size MEDIUM_DRINK = Size.MEDIUM;
-
     private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
     @Override
@@ -64,17 +58,10 @@ public class ComboController extends AppCompatActivity {
             return insets;
         });
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-
-        }
-
         initializeButtons();
         setupAdapters();
         setupListeners();
         updatePrice();
-
 
         LinearLayout menuButton = findViewById(R.id.menuButton);
         menuButton.setOnClickListener(v -> {
@@ -82,7 +69,6 @@ public class ComboController extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-
         LinearLayout cartButton = findViewById(R.id.cartButton);
         LinearLayout ordersButton = findViewById(R.id.ordersButton);
 
@@ -90,7 +76,6 @@ public class ComboController extends AppCompatActivity {
             Intent intent = new Intent(this, CurrentOrderController.class);
             startActivity(intent);
         });
-
         ordersButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, PlacedOrderController.class);
             startActivity(intent);
@@ -139,22 +124,11 @@ public class ComboController extends AppCompatActivity {
 
     private void setupListeners() {
         minusBtn.setOnClickListener(v -> {
-            if (quantity > 1) {
-                quantity--;
-                quantityText.setText(String.valueOf(quantity));
-                updatePrice();
-            }
-        });
+            if (quantity > 1) { quantity--; quantityText.setText(String.valueOf(quantity)); updatePrice(); } });
 
-        plusBtn.setOnClickListener(v -> {
-            quantity++;
-            quantityText.setText(String.valueOf(quantity));
-            updatePrice();
-        });
+        plusBtn.setOnClickListener(v -> { quantity++; quantityText.setText(String.valueOf(quantity)); updatePrice(); });
 
-        addToCartBtn.setOnClickListener(v -> {
-            addComboToCart();
-        });
+        addToCartBtn.setOnClickListener(v -> { addComboToCart(); });
 
         drinkSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -167,30 +141,21 @@ public class ComboController extends AppCompatActivity {
                     case TEA: drinkIcon.setImageResource(R.drawable.tea); break;
                 }
             }
-
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-
+            public void onNothingSelected(AdapterView<?> parent) { }
         });
 
         sideSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Side side = (Side) parent.getItemAtPosition(position);
-
                 switch (side) {
                     case CHIPS: sideIcon.setImageResource(R.drawable.chips); break;
                     case APPLE_SLICES: sideIcon.setImageResource(R.drawable.apple_slice); break;
                 }
             }
-
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+            public void onNothingSelected(AdapterView<?> parent) { } });
     }
 
     private void updatePrice() {

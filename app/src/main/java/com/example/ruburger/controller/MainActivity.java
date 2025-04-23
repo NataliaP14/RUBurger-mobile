@@ -31,19 +31,12 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-
-        }
-
         LinearLayout burgerBox = findViewById(R.id.burgerBox);
         LinearLayout sandwichBox = findViewById(R.id.sandwichBox);
         LinearLayout beverageBox = findViewById(R.id.beverageBox);
         LinearLayout sideBox = findViewById(R.id.sideBox);
         LinearLayout cartButton = findViewById(R.id.cartButton);
         LinearLayout ordersButton = findViewById(R.id.ordersButton);
-
 
         burgerBox.setOnClickListener(v -> startActivity(new Intent(this, BurgerController.class)));
         sandwichBox.setOnClickListener(v -> startActivity(new Intent(this, SandwichController.class)));

@@ -38,7 +38,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BeverageController extends AppCompatActivity {
-
     private TextView priceText;
     private Button addToCartBtn;
     private BeverageAdapter adapter;
@@ -57,14 +56,6 @@ public class BeverageController extends AppCompatActivity {
             return insets;
         });
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-
-        }
-
-
-
         RecyclerView recyclerView = findViewById(R.id.beverageRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -73,27 +64,16 @@ public class BeverageController extends AppCompatActivity {
         adapter = new BeverageAdapter(this, allFlavors, this::showBeverageDialog, () -> {});
         recyclerView.setAdapter(adapter);
 
+        findViewById(R.id.menuButton).setOnClickListener(v -> { startActivity(new Intent(this, MainActivity.class)); finish(); });
 
-        findViewById(R.id.menuButton).setOnClickListener(v -> {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        });
+        findViewById(R.id.cartButton).setOnClickListener(v -> { startActivity(new Intent(this, CurrentOrderController.class)); });
 
-        findViewById(R.id.cartButton).setOnClickListener(v -> {
-            startActivity(new Intent(this, CurrentOrderController.class));
-        });
-
-        findViewById(R.id.ordersButton).setOnClickListener(v -> {
-            startActivity(new Intent(this, PlacedOrderController.class));
-        });
-
-
+        findViewById(R.id.ordersButton).setOnClickListener(v -> { startActivity(new Intent(this, PlacedOrderController.class)); });
     }
 
     private void showBeverageDialog(Flavor flavor, int quantity, Size size) {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_beverage_popup);
-
         TextView flavorTitle = dialog.findViewById(R.id.dialogFlavorTitle);
         Spinner sizeSpinner = dialog.findViewById(R.id.dialogSizeSpinner);
         TextView quantityText = dialog.findViewById(R.id.dialogQuantity);
@@ -112,45 +92,20 @@ public class BeverageController extends AppCompatActivity {
 
         final int[] qty = { quantity };
         final Size[] selectedSize = { size };
-
         updatePrice(qty[0], selectedSize[0], flavor, priceText);
 
         sizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                selectedSize[0] = Size.values()[pos];
-                updatePrice(qty[0], selectedSize[0], flavor, priceText);
-            }
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) { selectedSize[0] = Size.values()[pos]; updatePrice(qty[0], selectedSize[0], flavor, priceText); }
+            public void onNothingSelected(AdapterView<?> parent) { }
         });
-
-        plus.setOnClickListener(v -> {
-            qty[0]++;
-            quantityText.setText(String.valueOf(qty[0]));
-            updatePrice(qty[0], selectedSize[0], flavor, priceText);
+        plus.setOnClickListener(v -> { qty[0]++; quantityText.setText(String.valueOf(qty[0])); updatePrice(qty[0], selectedSize[0], flavor, priceText);
         });
-
         minus.setOnClickListener(v -> {
-            if (qty[0] > 1) {
-                qty[0]--;
-                quantityText.setText(String.valueOf(qty[0]));
-                updatePrice(qty[0], selectedSize[0], flavor, priceText);
-            }
+            if (qty[0] > 1) {qty[0]--; quantityText.setText(String.valueOf(qty[0])); updatePrice(qty[0], selectedSize[0], flavor, priceText); }
         });
-
         dialog.show();
-
-        addToCartBtn.setOnClickListener(v -> {
-            Beverage beverage = new Beverage(qty[0], selectedSize[0], flavor);
-            OrderSingleton.getInstance().addItem(beverage);
-            Toast.makeText(this, "Beverage added to your order!", Toast.LENGTH_SHORT).show();
-
-            dialog.dismiss();
-
+        addToCartBtn.setOnClickListener(v -> { Beverage beverage = new Beverage(qty[0], selectedSize[0], flavor); OrderSingleton.getInstance().addItem(beverage); Toast.makeText(this, "Beverage added to your order!", Toast.LENGTH_SHORT).show(); dialog.dismiss();
         });
-
-
     }
 
     private void updatePrice(int quantity, Size size, Flavor flavor, TextView priceText) {

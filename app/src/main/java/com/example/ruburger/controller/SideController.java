@@ -3,7 +3,6 @@ package com.example.ruburger.controller;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -56,34 +55,24 @@ public class SideController extends AppCompatActivity {
             return insets;
         });
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-
-        }
-
         initializeButtons();
         setupListeners();
         updatePrice();
 
-
         LinearLayout menuButton = findViewById(R.id.menuButton);
         menuButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            Intent intent = new Intent(this, MainActivity.class); startActivity(intent);
             finish();
         });
 
         LinearLayout cartButton = findViewById(R.id.cartButton);
         LinearLayout ordersButton = findViewById(R.id.ordersButton);
 
-        cartButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, CurrentOrderController.class);
+        cartButton.setOnClickListener(v -> { Intent intent = new Intent(this, CurrentOrderController.class);
             startActivity(intent);
         });
 
-        ordersButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, PlacedOrderController.class);
+        ordersButton.setOnClickListener(v -> { Intent intent = new Intent(this, PlacedOrderController.class);
             startActivity(intent);
         });
     }
@@ -105,9 +94,7 @@ public class SideController extends AppCompatActivity {
 
         Side[] sides = Side.values();
         List<String> sideList = new ArrayList<>();
-        for (Side side : sides) {
-            sideList.add(side.name());
-        }
+        for (Side side : sides) { sideList.add(side.name()); }
 
         ArrayAdapter<String> sideAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, sideList);
         sideAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -116,22 +103,12 @@ public class SideController extends AppCompatActivity {
 
         sideSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                updatePrice();
-            }
-
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { updatePrice(); }
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) { }
         });
 
-
-        Size[] sizes = Size.values();
-        List<String> sizeList = new ArrayList<>();
-        for (Size size : sizes) {
-            sizeList.add(size.name());
-        }
+        Size[] sizes = Size.values(); List<String> sizeList = new ArrayList<>(); for (Size size : sizes) { sizeList.add(size.name()); }
 
         ArrayAdapter<String> sizeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, sizeList);
         sizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -140,37 +117,16 @@ public class SideController extends AppCompatActivity {
 
         sizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                updatePrice();
-            }
-
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { updatePrice(); }
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) { }
         });
 
+        minusBtn.setOnClickListener(v -> { if (quantity > 1) { quantity--; quantityText.setText(String.valueOf(quantity)); updatePrice(); } });
 
-        minusBtn.setOnClickListener(v -> {
-            if (quantity > 1) {
-                quantity--;
-                quantityText.setText(String.valueOf(quantity));
-                updatePrice();
-            }
-        });
-
-        plusBtn.setOnClickListener(v -> {
-            quantity++;
-            quantityText.setText(String.valueOf(quantity));
-            updatePrice();
-        });
-
-        addToCartBtn.setOnClickListener(v -> {
-            addSideToCart();
-        });
-
+        plusBtn.setOnClickListener(v -> { quantity++; quantityText.setText(String.valueOf(quantity)); updatePrice(); });
+        addToCartBtn.setOnClickListener(v -> { addSideToCart(); });
     }
-
 
     private Side getSide() {
         return Side.valueOf(sideSpinner.getSelectedItem().toString());

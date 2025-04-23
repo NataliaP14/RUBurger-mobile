@@ -4,34 +4,23 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.ArrayAdapter;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.ruburger.R;
-import com.example.ruburger.model.Beverage;
 import com.example.ruburger.model.Flavor;
 import com.example.ruburger.model.Size;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class BeverageAdapter extends RecyclerView.Adapter<BeverageAdapter.BeverageViewHolder> {
-
     private final Context context;
     private final List<Flavor> flavors;
     private final Map<Flavor, Size> selectedSizes = new HashMap<>();
     private final Map<Flavor, Integer> selectedQuantities = new HashMap<>();
     private final Runnable onChangeCallback;
-
-
 
     public interface OnBeverageClickListener {
         void onBeverageClick(Flavor flavor, int quantity, Size size);
