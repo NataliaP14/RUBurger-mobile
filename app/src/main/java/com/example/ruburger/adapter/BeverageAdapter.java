@@ -31,7 +31,7 @@ public class BeverageAdapter extends RecyclerView.Adapter<BeverageAdapter.Bevera
     private final Map<Flavor, Integer> selectedQuantities = new HashMap<>();
     private final Runnable onChangeCallback;
 
-    private int quantity;
+
 
     public interface OnBeverageClickListener {
         void onBeverageClick(Flavor flavor, int quantity, Size size);
