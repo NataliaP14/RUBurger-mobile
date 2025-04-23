@@ -1,7 +1,10 @@
 package com.example.ruburger.controller;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
@@ -29,7 +32,7 @@ public class BurgerController extends AppCompatActivity {
     private CheckBox lettuce, tomato, onion, avocado, cheese;
     private ImageButton minusBtn, plusBtn;
     private TextView quantityText, priceText;
-    private Button addToCartBtn;
+    private Button addToCartBtn, makeItCombo;
     private int quantity = 1;
     private boolean isDoublePatty = false;
     private Bread selectedBread = null;
@@ -43,14 +46,22 @@ public class BurgerController extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_burger);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.title), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            v.setPadding(v.getPaddingLeft(), systemBars.top, v.getPaddingRight(), v.getPaddingBottom()
+            );
             return insets;
         });
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+
+        }
+
         initializeButtons();
         setupListeners();
+        goToCombo();
         updatePrice();
 
 
@@ -93,6 +104,8 @@ public class BurgerController extends AppCompatActivity {
         priceText = findViewById(R.id.priceText);
 
         addToCartBtn = findViewById(R.id.addToCart);
+        makeItCombo = findViewById(R.id.makeItCombo);
+
     }
 
     private void setupListeners() {
@@ -137,6 +150,19 @@ public class BurgerController extends AppCompatActivity {
             addBurgerToCart();
         });
 
+    }
+
+
+    private void loadComboView() {
+        makeItCombo.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ComboController.class);
+            startActivity(intent);
+        });
+    }
+
+    private void goToCombo() {
+
+        loadComboView();
     }
 
     private void updatePrice() {
