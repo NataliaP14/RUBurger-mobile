@@ -1,6 +1,7 @@
 package com.example.ruburger.globaldata;
 
 import com.example.ruburger.model.MenuItem;
+import com.example.ruburger.model.Order;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,39 +11,17 @@ public final class OrderSingleton {
     private List<MenuItem> currentOrder;
     private double orderTotal;
     private int currentOrderNumber = 0;
+    private List<Order> placedOrders;
 
-    private static class PlacedOrder {
-        private int orderNumber;
-        private List<MenuItem> items;
-
-        public PlacedOrder(int orderNumber, List<MenuItem> items) {
-            this.orderNumber = orderNumber;
-            this.items = items;
-        }
-
-
-        public int getOrderNumber() {
-            return orderNumber;
-        }
-
-        public List<MenuItem> getItems() {
-            return items;
-        }
-    }
-
-    private List<PlacedOrder> placedOrders;
-
-   
     private OrderSingleton() {
         currentOrder = new ArrayList<>();
         placedOrders = new ArrayList<>();
         orderTotal = 0.0;
-
     }
+
     public void setCurrentOrder(List<MenuItem> currentOrder) {
         this.currentOrder = currentOrder;
     }
-
 
     public List<MenuItem> getCurrentOrder() {
         return currentOrder;
@@ -89,9 +68,13 @@ public final class OrderSingleton {
 
     public int placeOrder() {
         if (!currentOrder.isEmpty()) {
-            List<MenuItem> orderCopy = new ArrayList<>(currentOrder);
-            PlacedOrder placedOrder = new PlacedOrder(currentOrderNumber, orderCopy);
-            placedOrders.add(placedOrder);
+            Order order = new Order(currentOrderNumber);
+
+            for (MenuItem item : currentOrder) {
+                order.addItem(item);
+            }
+
+            placedOrders.add(order);
 
             int placedOrderNumber = currentOrderNumber;
             currentOrder.clear();
@@ -104,7 +87,7 @@ public final class OrderSingleton {
     }
 
     public List<MenuItem> getPlacedOrder(int orderNumber) {
-        for (PlacedOrder order : placedOrders) {
+        for (Order order : placedOrders) {
             if (order.getOrderNumber() == orderNumber) {
                 return order.getItems();
             }
@@ -114,9 +97,48 @@ public final class OrderSingleton {
 
     public List<Integer> getAllOrderNumbers() {
         List<Integer> orderNumbers = new ArrayList<>();
-        for (PlacedOrder order : placedOrders) {
+        for (Order order : placedOrders) {
             orderNumbers.add(order.getOrderNumber());
         }
         return orderNumbers;
+    }
+
+    public void clearAllPlacedOrders() {
+        placedOrders.clear();
+    }
+
+    public void resetCurrentOrderNumber(int startForm) {
+        currentOrderNumber = startForm;
+    }
+
+    public void setCurrentOrderNumber(int orderNumber) {
+        currentOrderNumber = orderNumber;
+    }
+
+    public double getTotalWithTax(int orderNumber) {
+        for (Order order : placedOrders) {
+            if (order.getOrderNumber() == orderNumber) {
+                return order.getTotalAmount();
+            }
+        }
+        return 0.0;
+    }
+
+    public double getOrderSubtotal(int orderNumber) {
+        for (Order order : placedOrders) {
+            if (order.getOrderNumber() == orderNumber) {
+                return order.getSubTotal();
+            }
+        }
+        return 0.0;
+    }
+
+    public double getOrderTax(int orderNumber) {
+        for (Order order : placedOrders) {
+            if (order.getOrderNumber() == orderNumber) {
+                return order.getSalesTax();
+            }
+        }
+        return 0.0;
     }
 }
