@@ -16,8 +16,20 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.ruburger.R;
 
+/**
+ * @author Natalia Peguero, Olivia Kamau
+ * This main activity class sets up the main menu view for the application, this is the root point where you actually run the application
+ */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * Handles the creating of the view for the main menu class, and sets up the switching of the view based off the bottom nav buttons
+     * and the main select buttons such as Burger, Sandwich, Beverage, and Side
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
