@@ -29,7 +29,10 @@ import com.example.ruburger.globaldata.ComboSingleton;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-
+/**
+ * @author Natalia Peguero, Olivia Kamau
+ * This burger controller managages the logic for the burger selection
+ */
 public class BurgerController extends AppCompatActivity {
     private RadioGroup pattyGroup, breadGroup;
     private CheckBox lettuce, tomato, onion, avocado, cheese;
@@ -43,6 +46,13 @@ public class BurgerController extends AppCompatActivity {
     private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
 
+    /**
+     * Creates the view for the burger and handles the view switches for other buttons
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +83,9 @@ public class BurgerController extends AppCompatActivity {
     }
 
 
+    /**
+     * initializes the buttons that a user can select
+     */
     private void initializeButtons() {
         pattyGroup = findViewById(R.id.pattyGroup);
         breadGroup = findViewById(R.id.breadGroup);
@@ -96,6 +109,9 @@ public class BurgerController extends AppCompatActivity {
 
     }
 
+    /**
+     * Sets ups the listeners for the buttons that a user can select
+     */
     private void setupListeners() {
         pattyGroup.setOnCheckedChangeListener((group, checkedId) -> {
             isDoublePatty = (checkedId == R.id.doublePatty);
@@ -127,7 +143,9 @@ public class BurgerController extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Loads the combo view by creating a burger object and sending it to the combo singleton
+     */
     private void loadComboView() {
         makeItCombo.setOnClickListener(v -> {
             updateAddOns();
@@ -139,10 +157,16 @@ public class BurgerController extends AppCompatActivity {
         });
     }
 
+    /**
+     * Goes to the combo view
+     */
     private void goToCombo() {
         loadComboView();
     }
 
+    /**
+     * Dynamically updates the price by creating a burger object
+     */
     private void updatePrice() {
         Burger tempBurger = new Burger(selectedBread, selectedAddOns, quantity, isDoublePatty);
         double price = tempBurger.price();
@@ -150,6 +174,9 @@ public class BurgerController extends AppCompatActivity {
         priceText.setText(getString(R.string.price_placeholder, currencyFormat.format(price)));
     }
 
+    /**
+     * updates the addons based off user selection
+     */
     private void updateAddOns() {
         selectedAddOns.clear();
 
@@ -161,6 +188,9 @@ public class BurgerController extends AppCompatActivity {
     }
 
 
+    /**
+     * Adds the burger object into the current order cart view and sends a toast message
+     */
     private void addBurgerToCart() {
         Burger burger = new Burger(selectedBread, new ArrayList<>(selectedAddOns), quantity, isDoublePatty);
 

@@ -37,12 +37,23 @@ import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author Natalia Peguero, Olivia Kamau
+ * This beverage controller manages the logic for the beverages
+ */
 public class BeverageController extends AppCompatActivity {
     private TextView priceText;
     private Button addToCartBtn;
     private BeverageAdapter adapter;
     private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
+    /**
+     * Sets up the view for beverage and the other view switches
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +82,12 @@ public class BeverageController extends AppCompatActivity {
         findViewById(R.id.ordersButton).setOnClickListener(v -> { startActivity(new Intent(this, PlacedOrderController.class)); });
     }
 
+    /**
+     * This is the popup for the beverage dialog
+     * @param flavor the flavor chosen
+     * @param quantity quantity
+     * @param size size
+     */
     private void showBeverageDialog(Flavor flavor, int quantity, Size size) {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_beverage_popup);
@@ -95,7 +112,19 @@ public class BeverageController extends AppCompatActivity {
         updatePrice(qty[0], selectedSize[0], flavor, priceText);
 
         sizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            /**
+             * For item selection, for the size of beverage
+             * @param parent The AdapterView where the selection happened
+             * @param view The view within the AdapterView that was clicked
+             * @param pos The position of the view in the adapter
+             * @param id The row id of the item that is selected
+             */
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) { selectedSize[0] = Size.values()[pos]; updatePrice(qty[0], selectedSize[0], flavor, priceText); }
+
+            /**
+             * Contains no selected item
+             * @param parent The AdapterView that now contains no selected item.
+             */
             public void onNothingSelected(AdapterView<?> parent) { }
         });
         plus.setOnClickListener(v -> { qty[0]++; quantityText.setText(String.valueOf(qty[0])); updatePrice(qty[0], selectedSize[0], flavor, priceText);
@@ -108,6 +137,13 @@ public class BeverageController extends AppCompatActivity {
         });
     }
 
+    /**
+     * Updates the price of beverage dynamically
+     * @param quantity the quantity
+     * @param size the size
+     * @param flavor the flavor
+     * @param priceText the price text
+     */
     private void updatePrice(int quantity, Size size, Flavor flavor, TextView priceText) {
         Beverage beverage = new Beverage(quantity, size, flavor);
         double price = beverage.price();

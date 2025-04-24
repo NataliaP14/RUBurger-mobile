@@ -33,6 +33,10 @@ import com.example.ruburger.model.Sandwich;
 import com.example.ruburger.model.Size;
 import java.text.NumberFormat;
 
+/**
+ * @author Natalia Peguero, Olivia Kamau
+ * This combo controller manages the logic for the combo based off Burger or Sandwich
+ */
 public class ComboController extends AppCompatActivity {
     private Spinner sideSpinner, drinkSpinner;
     private ImageView sideIcon, drinkIcon;
@@ -45,6 +49,13 @@ public class ComboController extends AppCompatActivity {
     private static final Size MEDIUM_DRINK = Size.MEDIUM;
     private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
+    /**
+     * Manages the view for the combo, and handles the switching of views based off the buttons
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +93,9 @@ public class ComboController extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Initializing all of the buttons for user selection
+     */
     private void initializeButtons() {
         sideSpinner = findViewById(R.id.sideSpinner);
         sideIcon = findViewById(R.id.sideIcon);
@@ -98,6 +111,10 @@ public class ComboController extends AppCompatActivity {
         priceText = findViewById(R.id.priceText);
         addToCartBtn = findViewById(R.id.addToCart);
     }
+
+    /**
+     * Sets up the adapters for the sides and the drinks
+     */
     private void setupAdapters() {
 
         Side[] sides = new Side[] {
@@ -122,6 +139,10 @@ public class ComboController extends AppCompatActivity {
 
     }
 
+
+    /**
+     * Sets up the listeners for the minus and plus button, and dynamically changes the image for the drink and side option for the combo
+     */
     private void setupListeners() {
         minusBtn.setOnClickListener(v -> {
             if (quantity > 1) { quantity--; quantityText.setText(String.valueOf(quantity)); updatePrice(); } });
@@ -131,6 +152,13 @@ public class ComboController extends AppCompatActivity {
         addToCartBtn.setOnClickListener(v -> { addComboToCart(); });
 
         drinkSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            /**
+             * Dynamically changes the the drink image based off user selection
+             * @param parent The AdapterView where the selection happened
+             * @param view The view within the AdapterView that was clicked
+             * @param position The position of the view in the adapter
+             * @param id The row id of the item that is selected
+             */
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Flavor flavor = (Flavor) parent.getItemAtPosition(position);
@@ -141,11 +169,23 @@ public class ComboController extends AppCompatActivity {
                     case TEA: drinkIcon.setImageResource(R.drawable.tea); break;
                 }
             }
+
+            /**
+             * Method that contains no selected items, for when u select nothing
+             * @param parent The AdapterView that now contains no selected item.
+             */
             @Override
             public void onNothingSelected(AdapterView<?> parent) { }
         });
 
         sideSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            /**
+             *
+             * @param parent The AdapterView where the selection happened
+             * @param view The view within the AdapterView that was clicked
+             * @param position The position of the view in the adapter
+             * @param id The row id of the item that is selected
+             */
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Side side = (Side) parent.getItemAtPosition(position);
@@ -154,10 +194,18 @@ public class ComboController extends AppCompatActivity {
                     case APPLE_SLICES: sideIcon.setImageResource(R.drawable.apple_slice); break;
                 }
             }
+
+            /**
+             * Method that for when u select nothing
+             * @param parent The AdapterView that now contains no selected item.
+             */
             @Override
             public void onNothingSelected(AdapterView<?> parent) { } });
     }
 
+    /**
+     * Dynamically updates the price of the combo, based off user selection
+     */
     private void updatePrice() {
         Sandwich mainItem = ComboSingleton.getInstance().getMainItem();
         Flavor flavor = (Flavor) drinkSpinner.getSelectedItem();
@@ -173,6 +221,9 @@ public class ComboController extends AppCompatActivity {
 
     }
 
+    /**
+     * Logic for adding the combo to the cart by creating a combo object
+     */
     private void addComboToCart() {
         Sandwich mainItem = ComboSingleton.getInstance().getMainItem();
         Flavor flavor = (Flavor) drinkSpinner.getSelectedItem();
