@@ -32,6 +32,7 @@ import java.util.List;
 
 
 /**
+ * @author Natalia Peguero, Olivia Kamau
  * Controller class for the side item selection screen. Handles user interactions for selecting a side.
  */
 public class SideController extends AppCompatActivity {

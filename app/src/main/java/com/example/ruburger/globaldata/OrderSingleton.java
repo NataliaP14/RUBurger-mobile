@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *  @author Natalia Peguero, Olivia Kamau
  * This is a singleton class that manages the current and placed orders.
  * It stores the current list of the menu items being ordered, the price and a list of the past orders.
  */
