@@ -31,6 +31,9 @@ import java.util.Arrays;
 import java.util.List;
 
 
+/**
+ * Controller class for the side item selection screen. Handles user interactions for selecting a side.
+ */
 public class SideController extends AppCompatActivity {
     private Spinner sideSpinner;
     private Spinner sizeSpinner;
@@ -42,6 +45,13 @@ public class SideController extends AppCompatActivity {
     private Size selectedSize;
     private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
+    /**
+     * Initializes the activity, sets up the UI and all the event listeners.
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +88,9 @@ public class SideController extends AppCompatActivity {
     }
 
 
+    /**
+     * Initializes the UI buttons and text components.
+     */
     private void initializeButtons() {
 
         minusBtn = findViewById(R.id.minusBtn);
@@ -90,6 +103,9 @@ public class SideController extends AppCompatActivity {
 
     }
 
+    /**
+     * Sets up all the listeners for user interaction (for the dropdown and the button clicks for quantity).
+     */
     private void setupListeners() {
 
         Side[] sides = Side.values();
@@ -128,15 +144,26 @@ public class SideController extends AppCompatActivity {
         addToCartBtn.setOnClickListener(v -> { addSideToCart(); });
     }
 
+    /**
+     * Returns the selected side from the spinner.
+     * @return  the selected side.
+     */
     private Side getSide() {
         return Side.valueOf(sideSpinner.getSelectedItem().toString());
     }
 
+    /**
+     * Returns the selected size from the spinner.
+     * @return  the chosen size.
+     */
     private Size getSize() {
         return Size.valueOf(sizeSpinner.getSelectedItem().toString());
     }
 
 
+    /**
+     * Updates teh displayed price based on the side, size and quantity chosen.
+     */
     private void updatePrice() {
         Side selectedSide = getSide();
         Size selectedSize = getSize();
@@ -147,6 +174,9 @@ public class SideController extends AppCompatActivity {
 
     }
 
+    /**
+     * Adds the selected side item to the cart (the OrderSingleton) and shows a confirmation message.
+     */
     private void addSideToCart() {
         Side selectedSide = getSide();
         Size selectedSize = getSize();

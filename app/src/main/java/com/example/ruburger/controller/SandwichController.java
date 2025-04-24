@@ -36,7 +36,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * UI controller for customizing a sandwich. It handles user interaction with the sandwich screen.
+ */
 public class SandwichController extends AppCompatActivity {
 
     private Spinner breadSpinner;
@@ -51,10 +53,18 @@ public class SandwichController extends AppCompatActivity {
     private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
 
+    /**
+     * Retrieves the selected bread option from the Spinner.
+     * @return  the selected bread enum value.
+     */
     private Bread getSelectedBread() {
         return Bread.valueOf(breadSpinner.getSelectedItem().toString());
     }
 
+    /**
+     * Retrieves the selected protein option from the RadioGroup.
+     * @return  the selected Protein enum value.
+     */
     private Protein getSelectedProtein() {
         RadioGroup proteinGroup = findViewById(R.id.proteinGroup);
         int selectedId = proteinGroup.getCheckedRadioButtonId();
@@ -68,7 +78,10 @@ public class SandwichController extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * Initializes the activity and sets up the UI components, listeners and default selections.
+     * @return  the saved state of the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +115,9 @@ public class SandwichController extends AppCompatActivity {
         ordersButton.setOnClickListener(v -> { Intent intent = new Intent(this, PlacedOrderController.class); startActivity(intent); });
     }
 
+    /**
+     * Initializes the UI components by linking them to their XML layout IDs.
+     */
     private void initializeButtons() {
 
         breadSpinner = findViewById(R.id.breadSpinner);
@@ -121,6 +137,9 @@ public class SandwichController extends AppCompatActivity {
 
     }
 
+    /**
+     * Sets up the listeners for the UI elements (spinner, checkboxes, buttons, radio groups).
+     */
     private void setupListeners() {
         Bread[] breads = Bread.values();
         List<String> breadList = new ArrayList<>();
@@ -157,6 +176,9 @@ public class SandwichController extends AppCompatActivity {
         addToCartBtn.setOnClickListener(v -> { addSandwichToCart(); });
     }
 
+    /**
+     * Loads the combo view by saving the current sandwich as the main item in the combo.
+     */
     private void loadComboView() {
         makeItCombo.setOnClickListener(v -> {
             updateAddOns();
@@ -167,10 +189,16 @@ public class SandwichController extends AppCompatActivity {
         });
     }
 
+    /**
+     * Initiates the combo button.
+     */
     private void goToCombo() {
         loadComboView();
     }
 
+    /**
+     * Calculates and updates the price of the sandwich based on the user's selections.
+     */
     private void updatePrice() {
 
         selectedBread = getSelectedBread();
@@ -185,6 +213,9 @@ public class SandwichController extends AppCompatActivity {
         priceText.setText(getString(R.string.price_placeholder, currencyFormat.format(price)));
     }
 
+    /**
+     * Updates the list of selected add-ons based on the checked checkboxes.
+     */
     private void updateAddOns() {
         selectedAddOns.clear();
 
@@ -196,6 +227,9 @@ public class SandwichController extends AppCompatActivity {
     }
 
 
+    /**
+     * Creates a new Sandwich object with the selected options and adds it to the current order.
+     */
     private void addSandwichToCart() {
 
         selectedBread = getSelectedBread();

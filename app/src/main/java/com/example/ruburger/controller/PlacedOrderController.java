@@ -29,7 +29,10 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * It displays and manages previously placed orders, lets the user view their order history
+ * and see the contents of individual orders.
+ */
 public class PlacedOrderController extends AppCompatActivity {
 
     private Spinner orderDropdown;
@@ -43,7 +46,14 @@ public class PlacedOrderController extends AppCompatActivity {
     private int currentSelectedOrderIndex = 0;
 
 
-
+    /**
+     * Initializes the UI components and sets up the listeners.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,12 +95,19 @@ public class PlacedOrderController extends AppCompatActivity {
     }
 
 
+    /**
+     * Resumes an activity from a paused state and refreshes the dropdown to reflect updates to
+     * the order list.
+     */
     @Override
     protected void onResume() {
         super.onResume();
         populateOrderDropdown();
     }
 
+    /**
+     * Initializes the UI elements and sets up adapters for the list view and dropdown.
+     */
     private void initializeViews() {
         orderDropdown = findViewById(R.id.orderDropdown);
         orderItemsList = findViewById(R.id.orderItemsList);
@@ -102,6 +119,9 @@ public class PlacedOrderController extends AppCompatActivity {
         orderItemsList.setAdapter(orderAdapter);
     }
 
+    /**
+     * Sets up the UI listeners including the dropdown selector and cancel order button.
+     */
     private void setupListeners() {
         orderDropdown.setOnItemSelectedListener((new AdapterView.OnItemSelectedListener() {
             @Override
@@ -120,6 +140,9 @@ public class PlacedOrderController extends AppCompatActivity {
 
     }
 
+    /**
+     * Populates the dropdown with the order numbers from the OrderSingleton.
+     */
     private void populateOrderDropdown() {
         List<Integer> orderNumbers = OrderSingleton.getInstance().getAllOrderNumbers();
         List<String> dropdownItems = new ArrayList<>();
@@ -146,6 +169,11 @@ public class PlacedOrderController extends AppCompatActivity {
         }
     }
 
+    /**
+     * Displays the details of the selected order including its items and total price.
+     *
+     * @param position  Index of the selected order in the dropdown.
+     */
     private void displaySelectedOrder(int position) {
         OrderSingleton orderSingleton = OrderSingleton.getInstance();
         List<Integer> orderNumbers = orderSingleton.getAllOrderNumbers();
@@ -175,6 +203,9 @@ public class PlacedOrderController extends AppCompatActivity {
         orderAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Cancels the selected order after prompting the user for confirmation.
+     */
     private void cancelCurrentOrder() {
         OrderSingleton orderSingleton = OrderSingleton.getInstance();
         List<Integer> orderNumbers = orderSingleton.getAllOrderNumbers();
@@ -216,6 +247,11 @@ public class PlacedOrderController extends AppCompatActivity {
     }
 
 
+    /**
+     * Removes the specified order from the OrderSingleton and rebuilds the remaining orders.
+     * @param orderNumber   The order number to remove.
+     * @return  true if the order was successfully removed.
+     */
     private boolean removeOrderFromSingleton(int orderNumber) {
         OrderSingleton orderSingleton = OrderSingleton.getInstance();
         List<Integer> allOrderNumbers = orderSingleton.getAllOrderNumbers();
