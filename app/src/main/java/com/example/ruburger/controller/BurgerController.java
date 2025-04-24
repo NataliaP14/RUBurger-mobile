@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.ImageButton;
@@ -55,42 +56,24 @@ public class BurgerController extends AppCompatActivity {
             return insets;
         });
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-
-        }
-
         initializeButtons();
         setupListeners();
         goToCombo();
         updatePrice();
 
+        LinearLayout menuButton = findViewById(R.id.menuButton);
+        menuButton.setOnClickListener(v -> { Intent intent = new Intent(this, MainActivity.class); startActivity(intent); finish(); });
 
-        Button menuButton = findViewById(R.id.menuButton);
-        menuButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        });
+        LinearLayout cartButton = findViewById(R.id.cartButton);
+        LinearLayout ordersButton = findViewById(R.id.ordersButton);
 
-        Button cartButton = findViewById(R.id.cartButton);
-        Button ordersButton = findViewById(R.id.ordersButton);
+        cartButton.setOnClickListener(v -> { Intent intent = new Intent(this, CurrentOrderController.class); startActivity(intent);});
 
-        cartButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, CurrentOrderController.class);
-            startActivity(intent);
-        });
-
-        ordersButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, PlacedOrderController.class);
-            startActivity(intent);
-        });
+        ordersButton.setOnClickListener(v -> { Intent intent = new Intent(this, PlacedOrderController.class); startActivity(intent); });
     }
 
 
     private void initializeButtons() {
-
         pattyGroup = findViewById(R.id.pattyGroup);
         breadGroup = findViewById(R.id.breadGroup);
 
@@ -131,29 +114,16 @@ public class BurgerController extends AppCompatActivity {
 
         CheckBox [] checkBoxes = {lettuce, tomato, onion, avocado, cheese};
         for (CheckBox checkBox : checkBoxes) {
-            checkBox.setOnCheckedChangeListener(((buttonView, isChecked) -> {
-                updateAddOns();
-                updatePrice();
-            }));
+            checkBox.setOnCheckedChangeListener(((buttonView, isChecked) -> { updateAddOns(); updatePrice(); }));
         }
 
         minusBtn.setOnClickListener(v -> {
-            if (quantity > 1) {
-                quantity--;
-                quantityText.setText(String.valueOf(quantity));
-                updatePrice();
-            }
+            if (quantity > 1) { quantity--; quantityText.setText(String.valueOf(quantity)); updatePrice(); }
         });
 
-        plusBtn.setOnClickListener(v -> {
-            quantity++;
-            quantityText.setText(String.valueOf(quantity));
-            updatePrice();
-        });
+        plusBtn.setOnClickListener(v -> { quantity++; quantityText.setText(String.valueOf(quantity)); updatePrice(); });
 
-        addToCartBtn.setOnClickListener(v -> {
-            addBurgerToCart();
-        });
+        addToCartBtn.setOnClickListener(v -> { addBurgerToCart(); });
 
     }
 
@@ -199,8 +169,5 @@ public class BurgerController extends AppCompatActivity {
         Toast.makeText(this, "Burger added to your order!", Toast.LENGTH_SHORT).show();
 
     }
-
-
-
 
 }
