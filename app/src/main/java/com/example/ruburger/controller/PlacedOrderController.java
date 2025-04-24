@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *  @author Natalia Peguero, Olivia Kamau
  * It displays and manages previously placed orders, lets the user view their order history
  * and see the contents of individual orders.
  */

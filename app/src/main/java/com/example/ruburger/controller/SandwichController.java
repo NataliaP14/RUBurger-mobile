@@ -37,6 +37,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ *  @author Natalia Peguero, Olivia Kamau
  * UI controller for customizing a sandwich. It handles user interaction with the sandwich screen.
  */
 public class SandwichController extends AppCompatActivity {
