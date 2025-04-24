@@ -26,6 +26,13 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * This is a controller class for managing the Current Order screen.
+ * It handles the display of current items in the order, removing specific order
+ * items and placing the order.
+ * @author  Natalia Peguero, Olivia Kamau
+ */
 public class CurrentOrderController extends AppCompatActivity {
     private ListView orderItemsList;
     private Button removeItemBtn, placeOrderBtn;
@@ -36,6 +43,14 @@ public class CurrentOrderController extends AppCompatActivity {
     private int selectedItemPosition = -1;
     private static final double NJ_TAX_RATE = 0.06625;
 
+
+    /**
+     * Sets up the view, initializes the UI components, listeners and updates the order display.
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,12 +89,18 @@ public class CurrentOrderController extends AppCompatActivity {
     }
 
 
+    /**
+     * Refreshes the order display when the activity resumes.
+     */
     @Override
     protected void onResume() {
         super.onResume();
         updateOrderDisplay();
     }
 
+    /**
+     * Initializes all view components and sets up the adapter for the order list.
+     */
     private void initializeViews() {
         orderItemsList = findViewById(R.id.orderItemsList);
         removeItemBtn = findViewById(R.id.removeItemBtn);
@@ -94,7 +115,9 @@ public class CurrentOrderController extends AppCompatActivity {
         orderItemsList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
     }
 
-
+    /**
+     * Sets up listeners for the list item selection and button clicks.
+     */
     private void setupListeners() {
         orderItemsList.setOnItemClickListener((parent, view, position, id) -> {
             selectedItemPosition = position;
@@ -106,6 +129,9 @@ public class CurrentOrderController extends AppCompatActivity {
 
     }
 
+    /**
+     * Updates the list of order items displayed and recalculates the totals.
+     */
     private void updateOrderDisplay() {
 
         OrderSingleton orderSingleton = OrderSingleton.getInstance();
@@ -130,6 +156,9 @@ public class CurrentOrderController extends AppCompatActivity {
 
     }
 
+    /**
+     * Calculates and updates the subtotal, tax and total amount for the current order
+     */
     private void updateOrderTotals() {
         OrderSingleton orderSingleton = OrderSingleton.getInstance();
         double subtotalValue = orderSingleton.getOrderTotal();
@@ -141,6 +170,9 @@ public class CurrentOrderController extends AppCompatActivity {
         totalAmount.setText(getString(R.string.total, currencyFormat.format(totalValue)));
     }
 
+    /**
+     * Removes the selected item from the current order.
+     */
     public void removeSelectedItem() {
         if (selectedItemPosition >= 0 && !OrderSingleton.getInstance().isEmpty()) {
             OrderSingleton orderSingleton = OrderSingleton.getInstance();
@@ -154,6 +186,9 @@ public class CurrentOrderController extends AppCompatActivity {
         }
     }
 
+    /**
+     * Places the current order if it's not empty, clears the current order and updates the totals.
+     */
     private void placeOrder() {
         OrderSingleton orderSingleton = OrderSingleton.getInstance();
 
